@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+{% block title %}Vocabulary{% endblock %}
+{% block nav_title %}Vocabulary{% endblock %}
+
+{% block content %}
+
+<!-- ── Screen: Lesson select ──────────────────────────────────────────────── -->
+<div id="screen-select" class="fade-up">
+  <h1 class="text-2xl font-bold mb-1">Vocabulary</h1>
+  <p class="text-slate-500 mb-6">Choose a lesson to practice</p>
+  <div class="grid gap-4">
+    {% for lesson in lessons %}
+    <button onclick="selectLesson('{{ lesson.id }}')"
+            class="group text-left bg-white rounded-2xl shadow-sm border border-slate-100 p-6
+                   hover:shadow-md hover:border-violet-200 transition-all duration-200">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="text-lg font-bold text-slate-800 group-hover:text-violet-700 transition">{{ lesson.title }}</h3>
+          <p class="text-slate-500 text-sm mt-0.5">{{ lesson.subtitle }}</p>
+        </div>
+        <span class="text-xs font-semibold text-violet-500 bg-violet-50 px-3 py-1 rounded-full whitespace-nowrap">
+          {{ lesson.count }} words
+        </span>
+      </div>
+    </button>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- ── Screen: Quiz ───────────────────────────────────────────────────────── -->
+<div id="screen-quiz" class="hidden fade-up">
+
+  <!-- Header: progress + score -->
+  <div class="flex items-center justify-between mb-3 text-sm text-slate-500 font-medium">
+    <span id="q-counter">1 / 95</span>
+    <span>
+      <span class="text-emerald-600 font-semibold" id="score-correct">✓ 0</span>
+      <span class="mx-1 text-slate-300">·</span>
+      <span class="text-rose-500 font-semibold" id="score-wrong">✗ 0</span>
+    </span>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="w-full bg-slate-100 rounded-full h-2 mb-6">
+    <div id="progress-bar" class="progress-bar bg-violet-500 h-2 rounded-full" style="width:0%"></div>
+  </div>
+
+  <!-- Card -->
+  <div id="quiz-card" class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+
+    <!-- Question -->
+    <div id="q-phase" class="">
+      <p class="text-xs font-semibold uppercase tracking-widest text-violet-400 mb-3">Spanish → English</p>
+      <div id="q-word" class="text-4xl font-extrabold text-slate-800 leading-tight mb-2"></div>
+      <p class="text-slate-400 text-sm mb-8">What is the English translation?</p>
+      <input id="answer-input" type="text" autocomplete="off" autocorrect="off" spellcheck="false"
+             placeholder="Type your answer…"
+             class="w-full border border-slate-200 rounded-xl px-4 py-3 text-lg
+                    focus:ring-2 focus:ring-violet-400 focus:border-violet-400 transition mb-5"
+             onkeydown="if(event.key==='Enter') submitAnswer()" />
+      <div class="flex gap-3">
+        <button onclick="submitAnswer()"
+                class="flex-1 bg-violet-600 hover:bg-violet-700 text-white font-semibold
+                       py-3 rounded-xl transition">Check</button>
+        <button onclick="skipQuestion()"
+                class="px-5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold
+                       py-3 rounded-xl transition">Skip</button>
+      </div>
+    </div>
+
+    <!-- Feedback -->
+    <div id="fb-phase" class="hidden">
+      <div id="fb-badge" class="text-lg font-bold mb-3"></div>
+      <div id="fb-correct" class="text-slate-500 text-sm mb-1">Correct answer:</div>
+      <div id="fb-answer" class="text-xl font-semibold text-slate-800 mb-8"></div>
+      <button onclick="nextQuestion()"
+              class="w-full bg-violet-600 hover:bg-violet-700 text-white font-semibold
+                     py-3 rounded-xl transition">Next →</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── Screen: Results ────────────────────────────────────────────────────── -->
+<div id="screen-results" class="hidden fade-up">
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 text-center">
+    <div class="text-5xl mb-4" id="result-emoji">🎉</div>
+    <h2 class="text-2xl font-extrabold text-slate-800 mb-1">Quiz Complete!</h2>
+    <p id="result-score" class="text-slate-500 mb-4"></p>
+
+    <!-- Score bar -->
+    <div class="w-full bg-slate-100 rounded-full h-3 mb-8">
+      <div id="result-bar" class="progress-bar h-3 rounded-full bg-emerald-500" style="width:0%"></div>
+    </div>
+
+    <!-- Wrong answers list -->
+    <div id="wrong-section" class="text-left mb-6 hidden">
+      <h3 class="text-sm font-bold uppercase tracking-wide text-slate-400 mb-3">Words to review</h3>
+      <div id="wrong-list" class="space-y-2 max-h-64 overflow-y-auto pr-1"></div>
+    </div>
+
+    <div class="flex flex-col gap-3">
+      <button id="btn-practice-wrong" onclick="practiceWrong()"
+              class="hidden w-full bg-rose-50 hover:bg-rose-100 text-rose-600 font-semibold
+                     py-3 rounded-xl transition">Practice Wrong Words</button>
+      <button onclick="restartLesson()"
+              class="w-full bg-violet-600 hover:bg-violet-700 text-white font-semibold
+                     py-3 rounded-xl transition">Restart Lesson</button>
+      <button onclick="backToSelect()"
+              class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold
+                     py-3 rounded-xl transition">Back to Lessons</button>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block head %}
+<script>
+  // ── State ──────────────────────────────────────────────────────────────────
+  let questions   = [];   // [{spanish, answers:[...]}]
+  let currentIdx  = 0;
+  let correct     = 0;
+  let wrongItems  = [];   // [{spanish, answers, userAnswer}]
+  let currentLesson = null;
+
+  // ── Utilities ──────────────────────────────────────────────────────────────
+  function norm(s) {
+    return s.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+  function checkAnswer(user, answers) {
+    return answers.some(a => norm(user) === norm(a));
+  }
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+  }
+  function show(id)   { document.getElementById(id).classList.remove('hidden'); }
+  function hide(id)   { document.getElementById(id).classList.add('hidden'); }
+  function setText(id, t) { document.getElementById(id).textContent = t; }
+  function setHTML(id, h) { document.getElementById(id).innerHTML = h; }
+
+  // ── Screens ────────────────────────────────────────────────────────────────
+  function showScreen(name) {
+    ['screen-select','screen-quiz','screen-results'].forEach(s => hide(s));
+    show('screen-' + name);
+  }
+  function backToSelect() { showScreen('select'); }
+
+  // ── Load lesson ────────────────────────────────────────────────────────────
+  function selectLesson(id) {
+    currentLesson = id;
+    fetch(`/api/vocabulary/${id}`)
+      .then(r => r.json())
+      .then(data => {
+        questions = Object.entries(data.words).map(([spanish, answers]) => ({spanish, answers}));
+        shuffle(questions);
+        startQuiz();
+      });
+  }
+
+  function startQuiz() {
+    currentIdx = 0; correct = 0; wrongItems = [];
+    showScreen('quiz');
+    renderQuestion();
+  }
+
+  function practiceWrong() {
+    questions = wrongItems.map(w => ({spanish: w.spanish, answers: w.answers}));
+    shuffle(questions);
+    startQuiz();
+  }
+
+  function restartLesson() { selectLesson(currentLesson); }
+
+  // ── Render question ────────────────────────────────────────────────────────
+  function renderQuestion() {
+    const total = questions.length;
+    setText('q-counter', `${currentIdx + 1} / ${total}`);
+    document.getElementById('progress-bar').style.width = `${(currentIdx / total) * 100}%`;
+    setText('score-correct', `✓ ${correct}`);
+    setText('score-wrong', `✗ ${wrongItems.length}`);
+
+    const q = questions[currentIdx];
+    setText('q-word', q.spanish);
+
+    // Reset card
+    const card = document.getElementById('quiz-card');
+    card.className = 'bg-white rounded-2xl shadow-sm border border-slate-100 p-8 pop';
+    show('q-phase'); hide('fb-phase');
+    const input = document.getElementById('answer-input');
+    input.value = '';
+    input.disabled = false;
+    setTimeout(() => input.focus(), 50);
+  }
+
+  // ── Submit / Skip ──────────────────────────────────────────────────────────
+  function submitAnswer() {
+    const input = document.getElementById('answer-input');
+    const answer = input.value.trim();
+    if (!answer) return;
+    input.disabled = true;
+
+    const q = questions[currentIdx];
+    const ok = checkAnswer(answer, q.answers);
+
+    if (ok) {
+      correct++;
+    } else {
+      wrongItems.push({...q, userAnswer: answer});
+    }
+    showFeedback(ok, q.answers);
+  }
+
+  function skipQuestion() {
+    const q = questions[currentIdx];
+    showFeedback(null, q.answers);  // null = skipped
+  }
+
+  // ── Feedback ───────────────────────────────────────────────────────────────
+  function showFeedback(ok, correctAnswers) {
+    hide('q-phase'); show('fb-phase');
+
+    const card = document.getElementById('quiz-card');
+    const badge = document.getElementById('fb-badge');
+    const answerEl = document.getElementById('fb-answer');
+    const correctEl = document.getElementById('fb-correct');
+
+    if (ok === null) {
+      card.className = 'bg-white rounded-2xl shadow-sm border-2 border-slate-200 p-8';
+      badge.textContent = '⏭ Skipped';
+      badge.className = 'text-lg font-bold mb-3 text-slate-500';
+      correctEl.textContent = 'Correct answer:';
+    } else if (ok) {
+      card.className = 'bg-white rounded-2xl shadow-sm border-2 border-emerald-400 p-8';
+      badge.textContent = '✓ Correct!';
+      badge.className = 'text-lg font-bold mb-3 text-emerald-600';
+      correctEl.textContent = '';
+    } else {
+      card.className = 'bg-white rounded-2xl shadow-sm border-2 border-rose-400 p-8 shake';
+      badge.textContent = '✗ Wrong';
+      badge.className = 'text-lg font-bold mb-3 text-rose-500';
+      correctEl.textContent = 'Correct answer:';
+    }
+    answerEl.textContent = correctAnswers.join(' / ');
+  }
+
+  function nextQuestion() {
+    currentIdx++;
+    if (currentIdx >= questions.length) {
+      showResults();
+    } else {
+      renderQuestion();
+    }
+  }
+
+  // ── Results ────────────────────────────────────────────────────────────────
+  function showResults() {
+    showScreen('results');
+    const total = questions.length;
+    const pct   = total ? Math.round((correct / total) * 100) : 0;
+
+    let emoji = pct === 100 ? '🏆' : pct >= 80 ? '🎉' : pct >= 50 ? '📖' : '💪';
+    setText('result-emoji', emoji);
+    setText('result-score', `${correct} / ${total} correct (${pct}%)`);
+    document.getElementById('result-bar').style.width = `${pct}%`;
+
+    if (wrongItems.length > 0) {
+      show('wrong-section');
+      show('btn-practice-wrong');
+      const list = document.getElementById('wrong-list');
+      list.innerHTML = wrongItems.map(w => `
+        <div class="flex items-start justify-between gap-4 bg-slate-50 rounded-xl px-4 py-3 text-sm">
+          <span class="font-semibold text-slate-700">${w.spanish}</span>
+          <span class="text-slate-400 text-right">${w.answers.join(' / ')}</span>
+        </div>`).join('');
+    } else {
+      hide('wrong-section');
+      hide('btn-practice-wrong');
+    }
+
+    setTimeout(() => {
+      document.getElementById('result-bar').style.width = `${pct}%`;
+    }, 100);
+  }
+</script>
+{% endblock %}

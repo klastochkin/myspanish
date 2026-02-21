@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Spanish Study{% endblock %}
+{% block nav_title %}Spanish Study{% endblock %}
+
+{% block content %}
+<div class="text-center mb-10 fade-up">
+  <div class="text-5xl mb-3">🇪🇸</div>
+  <h1 class="text-3xl font-extrabold text-slate-800">Spanish Study</h1>
+  <p class="text-slate-500 mt-2">Lección 5 — Un Festival de Arte</p>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-5 fade-up">
+
+  <a href="/vocabulary"
+     class="group bg-white rounded-2xl shadow-sm border border-slate-100 p-8
+            hover:shadow-md hover:border-violet-200 transition-all duration-200 cursor-pointer">
+    <div class="text-4xl mb-4">📚</div>
+    <h2 class="text-xl font-bold text-slate-800 group-hover:text-violet-700 transition">Vocabulary</h2>
+    <p class="text-slate-500 text-sm mt-1">Translate Spanish words to English</p>
+    <div class="mt-4 text-xs font-semibold text-violet-500 bg-violet-50 inline-block px-3 py-1 rounded-full">
+      95 words
+    </div>
+  </a>
+
+  <a href="/conjugation"
+     class="group bg-white rounded-2xl shadow-sm border border-slate-100 p-8
+            hover:shadow-md hover:border-violet-200 transition-all duration-200 cursor-pointer">
+    <div class="text-4xl mb-4">✍️</div>
+    <h2 class="text-xl font-bold text-slate-800 group-hover:text-violet-700 transition">Conjugations</h2>
+    <p class="text-slate-500 text-sm mt-1">Practice verb forms in context</p>
+    <div class="mt-4 text-xs font-semibold text-violet-500 bg-violet-50 inline-block px-3 py-1 rounded-full">
+      21 verbs · 4 tenses
+    </div>
+  </a>
+
+</div>
+{% endblock %}

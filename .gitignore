@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.env
+wrong.json
+conj_wrong.json
+*.json
+venv/
+.venv/
