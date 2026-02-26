@@ -208,8 +208,13 @@
 
     if (ok) {
       correct++;
+      fetch('/api/event', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({type:'good_answer', quiz:'vocabulary', question: q.spanish})});
     } else {
       wrongItems.push({...q, userAnswer: answer});
+      fetch('/api/event', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({type:'bad_answer', quiz:'vocabulary', question: q.spanish,
+          user_answer: answer, correct_answer: q.answers.join(' / ')})});
     }
     showFeedback(ok, q.answers);
   }

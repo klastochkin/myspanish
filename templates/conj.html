@@ -317,7 +317,18 @@
 
     const q = questions[currentIdx];
     const ok = checkAns(answer, q.correct);
-    if (ok) { correct++; } else { wrongItems.push({...q}); }
+    if (ok) {
+      correct++;
+      fetch('/api/event', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({type:'good_answer', quiz:'conjugation',
+          question: q.verb + ' / ' + q.tenseName + ' / ' + q.pronoun})});
+    } else {
+      wrongItems.push({...q});
+      fetch('/api/event', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({type:'bad_answer', quiz:'conjugation',
+          question: q.verb + ' / ' + q.tenseName + ' / ' + q.pronoun,
+          user_answer: answer, correct_answer: q.correct})});
+    }
     showFeedback(ok, q);
   }
 
