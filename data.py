@@ -217,6 +217,174 @@ VERBS: dict[str, dict] = {
 }
 # fmt: on
 
+# ── Conditional tense (Lesson 2) ──────────────────────────────────────────────
+
+CONDITIONAL_PRONOUNS = ["yo", "tú", "usted/él/ella", "nosotros/as", "ustedes/ellos/ellas"]
+CONDITIONAL_TENSE = {"conditional": "Condicional"}
+
+# fmt: off
+CONDITIONAL_VERBS: dict[str, dict] = {
+    # ── haber / tener family ───────────────────────────────────────────────────
+    "haber": {
+        "english": "to have (aux) / there would be",
+        "sentence": "Ojalá {haber} más tiempo para practicar el español.",
+        "conditional": {"yo": "habría",      "tú": "habrías",      "usted/él/ella": "habría",      "nosotros/as": "habríamos",      "ustedes/ellos/ellas": "habrían"},
+    },
+    "tener": {
+        "english": "to have",
+        "sentence": "{tener} que estudiar más para el examen.",
+        "conditional": {"yo": "tendría",     "tú": "tendrías",     "usted/él/ella": "tendría",     "nosotros/as": "tendríamos",     "ustedes/ellos/ellas": "tendrían"},
+    },
+    "abstener": {
+        "english": "to abstain",
+        "sentence": "{abstener} de votar si no conociera bien al candidato.",
+        "conditional": {"yo": "abstendría",  "tú": "abstendrías",  "usted/él/ella": "abstendría",  "nosotros/as": "abstendríamos",  "ustedes/ellos/ellas": "abstendrían"},
+    },
+    "contener": {
+        "english": "to contain",
+        "sentence": "El informe {contener} información muy valiosa.",
+        "conditional": {"yo": "contendría",  "tú": "contendrías",  "usted/él/ella": "contendría",  "nosotros/as": "contendríamos",  "ustedes/ellos/ellas": "contendrían"},
+    },
+    "detener": {
+        "english": "to stop / detain",
+        "sentence": "{detener} el proyecto para revisarlo.",
+        "conditional": {"yo": "detendría",   "tú": "detendrías",   "usted/él/ella": "detendría",   "nosotros/as": "detendríamos",   "ustedes/ellos/ellas": "detendrían"},
+    },
+    "mantener": {
+        "english": "to maintain / keep",
+        "sentence": "{mantener} la calma en una situación difícil.",
+        "conditional": {"yo": "mantendría",  "tú": "mantendrías",  "usted/él/ella": "mantendría",  "nosotros/as": "mantendríamos",  "ustedes/ellos/ellas": "mantendrían"},
+    },
+    "obtener": {
+        "english": "to obtain / get",
+        "sentence": "{obtener} mejores notas con más práctica.",
+        "conditional": {"yo": "obtendría",   "tú": "obtendrías",   "usted/él/ella": "obtendría",   "nosotros/as": "obtendríamos",   "ustedes/ellos/ellas": "obtendrían"},
+    },
+    "sostener": {
+        "english": "to hold / sustain",
+        "sentence": "{sostener} esa opinión con buenos argumentos.",
+        "conditional": {"yo": "sostendría",  "tú": "sostendrías",  "usted/él/ella": "sostendría",  "nosotros/as": "sostendríamos",  "ustedes/ellos/ellas": "sostendrían"},
+    },
+    # ── caber ─────────────────────────────────────────────────────────────────
+    "caber": {
+        "english": "to fit",
+        "sentence": "Toda la ropa {caber} en una maleta pequeña.",
+        "conditional": {"yo": "cabría",      "tú": "cabrías",      "usted/él/ella": "cabría",      "nosotros/as": "cabríamos",      "ustedes/ellos/ellas": "cabrían"},
+    },
+    # ── hacer family ──────────────────────────────────────────────────────────
+    "hacer": {
+        "english": "to do / make",
+        "sentence": "{hacer} la tarea más rápido con mejor concentración.",
+        "conditional": {"yo": "haría",       "tú": "harías",       "usted/él/ella": "haría",       "nosotros/as": "haríamos",       "ustedes/ellos/ellas": "harían"},
+    },
+    "deshacer": {
+        "english": "to undo / undo",
+        "sentence": "{deshacer} los errores con paciencia y dedicación.",
+        "conditional": {"yo": "desharía",    "tú": "desharías",    "usted/él/ella": "desharía",    "nosotros/as": "desharíamos",    "ustedes/ellos/ellas": "desharían"},
+    },
+    "rehacer": {
+        "english": "to redo",
+        "sentence": "{rehacer} el ejercicio para mejorar la calificación.",
+        "conditional": {"yo": "reharía",     "tú": "reharías",     "usted/él/ella": "reharía",     "nosotros/as": "reharíamos",     "ustedes/ellos/ellas": "reharían"},
+    },
+    "satisfacer": {
+        "english": "to satisfy",
+        "sentence": "{satisfacer} todos los requisitos del programa.",
+        "conditional": {"yo": "satisfaría",  "tú": "satisfarías",  "usted/él/ella": "satisfaría",  "nosotros/as": "satisfaríamos",  "ustedes/ellos/ellas": "satisfarían"},
+    },
+    # ── poder ─────────────────────────────────────────────────────────────────
+    "poder": {
+        "english": "to be able to / can",
+        "sentence": "{poder} hablar español con fluidez con más práctica.",
+        "conditional": {"yo": "podría",      "tú": "podrías",      "usted/él/ella": "podría",      "nosotros/as": "podríamos",      "ustedes/ellos/ellas": "podrían"},
+    },
+    # ── poner family ──────────────────────────────────────────────────────────
+    "poner": {
+        "english": "to put / place",
+        "sentence": "{poner} más atención en la pronunciación.",
+        "conditional": {"yo": "pondría",     "tú": "pondrías",     "usted/él/ella": "pondría",     "nosotros/as": "pondríamos",     "ustedes/ellos/ellas": "pondrían"},
+    },
+    "componer": {
+        "english": "to compose",
+        "sentence": "{componer} una canción en español si supiera música.",
+        "conditional": {"yo": "compondría",  "tú": "compondrías",  "usted/él/ella": "compondría",  "nosotros/as": "compondríamos",  "ustedes/ellos/ellas": "compondrían"},
+    },
+    "exponer": {
+        "english": "to expose / present",
+        "sentence": "{exponer} las ideas con mayor claridad.",
+        "conditional": {"yo": "expondría",   "tú": "expondrías",   "usted/él/ella": "expondría",   "nosotros/as": "expondríamos",   "ustedes/ellos/ellas": "expondrían"},
+    },
+    "imponer": {
+        "english": "to impose",
+        "sentence": "{imponer} nuevas reglas para mejorar la disciplina.",
+        "conditional": {"yo": "impondría",   "tú": "impondrías",   "usted/él/ella": "impondría",   "nosotros/as": "impondríamos",   "ustedes/ellos/ellas": "impondrían"},
+    },
+    "oponer": {
+        "english": "to oppose",
+        "sentence": "{oponer} resistencia a los cambios innecesarios.",
+        "conditional": {"yo": "opondría",    "tú": "opondrías",    "usted/él/ella": "opondría",    "nosotros/as": "opondríamos",    "ustedes/ellos/ellas": "opondrían"},
+    },
+    "proponer": {
+        "english": "to propose",
+        "sentence": "{proponer} una solución creativa al problema.",
+        "conditional": {"yo": "propondría",  "tú": "propondrías",  "usted/él/ella": "propondría",  "nosotros/as": "propondríamos",  "ustedes/ellos/ellas": "propondrían"},
+    },
+    "suponer": {
+        "english": "to suppose / assume",
+        "sentence": "{suponer} que ya sabes la respuesta correcta.",
+        "conditional": {"yo": "supondría",   "tú": "supondrías",   "usted/él/ella": "supondría",   "nosotros/as": "supondríamos",   "ustedes/ellos/ellas": "supondrían"},
+    },
+    # ── querer / saber ────────────────────────────────────────────────────────
+    "querer": {
+        "english": "to want / love",
+        "sentence": "{querer} visitar España y aprender más español.",
+        "conditional": {"yo": "querría",     "tú": "querrías",     "usted/él/ella": "querría",     "nosotros/as": "querríamos",     "ustedes/ellos/ellas": "querrían"},
+    },
+    "saber": {
+        "english": "to know",
+        "sentence": "{saber} la respuesta si hubieras estudiado más.",
+        "conditional": {"yo": "sabría",      "tú": "sabrías",      "usted/él/ella": "sabría",      "nosotros/as": "sabríamos",      "ustedes/ellos/ellas": "sabrían"},
+    },
+    # ── venir family ──────────────────────────────────────────────────────────
+    "venir": {
+        "english": "to come",
+        "sentence": "{venir} a la clase de conversación los viernes.",
+        "conditional": {"yo": "vendría",     "tú": "vendrías",     "usted/él/ella": "vendría",     "nosotros/as": "vendríamos",     "ustedes/ellos/ellas": "vendrían"},
+    },
+    "convenir": {
+        "english": "to be convenient / suit",
+        "sentence": "{convenir} repasar el vocabulario antes del examen.",
+        "conditional": {"yo": "convendría",  "tú": "convendrías",  "usted/él/ella": "convendría",  "nosotros/as": "convendríamos",  "ustedes/ellos/ellas": "convendrían"},
+    },
+    "prevenir": {
+        "english": "to prevent / warn",
+        "sentence": "{prevenir} los malentendidos con comunicación clara.",
+        "conditional": {"yo": "prevendría",  "tú": "prevendrías",  "usted/él/ella": "prevendría",  "nosotros/as": "prevendríamos",  "ustedes/ellos/ellas": "prevendrían"},
+    },
+    "provenir": {
+        "english": "to come from / originate",
+        "sentence": "Las palabras {provenir} de raíces de otros idiomas.",
+        "conditional": {"yo": "provendría",  "tú": "provendrías",  "usted/él/ella": "provendría",  "nosotros/as": "provendríamos",  "ustedes/ellos/ellas": "provendrían"},
+    },
+    # ── decir / salir / valer ─────────────────────────────────────────────────
+    "decir": {
+        "english": "to say / tell",
+        "sentence": "{decir} la verdad aunque fuera difícil.",
+        "conditional": {"yo": "diría",       "tú": "dirías",       "usted/él/ella": "diría",       "nosotros/as": "diríamos",       "ustedes/ellos/ellas": "dirían"},
+    },
+    "salir": {
+        "english": "to leave / go out",
+        "sentence": "{salir} más a practicar el español si tuviera tiempo.",
+        "conditional": {"yo": "saldría",     "tú": "saldrías",     "usted/él/ella": "saldría",     "nosotros/as": "saldríamos",     "ustedes/ellos/ellas": "saldrían"},
+    },
+    "valer": {
+        "english": "to be worth",
+        "sentence": "{valer} la pena aprender un nuevo idioma.",
+        "conditional": {"yo": "valdría",     "tú": "valdrías",     "usted/él/ella": "valdría",     "nosotros/as": "valdríamos",     "ustedes/ellos/ellas": "valdrían"},
+    },
+}
+# fmt: on
+
 # ── Lessons ───────────────────────────────────────────────────────────────────
 
 LESSONS = {
@@ -232,6 +400,15 @@ LESSONS = {
             "title": "Lesson 1",
             "subtitle": "Lección 5 — Verbos",
             "verbs": VERBS,
+            "pronouns": PRONOUNS,
+            "tense_names": TENSE_NAMES,
+        },
+        "2": {
+            "title": "Lesson 2",
+            "subtitle": "El Condicional",
+            "verbs": CONDITIONAL_VERBS,
+            "pronouns": CONDITIONAL_PRONOUNS,
+            "tense_names": CONDITIONAL_TENSE,
         },
     },
 }

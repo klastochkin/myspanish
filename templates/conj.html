@@ -161,7 +161,7 @@
   let wrongItems    = [];
   let currentLesson = null;
 
-  const TENSE_ORDER = ['present','preterite','imperfect','future'];
+  // TENSE_ORDER is derived dynamically from lessonData.tense_names at load time
 
   // ── Utilities ──────────────────────────────────────────────────────────────
   function norm(s) {
@@ -209,13 +209,13 @@
   let allVerbsSelected = true;
 
   function buildConfigScreen() {
-    // Tenses
+    // Tenses — built from the lesson's own tense_names (works for any lesson)
     const tenseGrid = document.getElementById('tense-grid');
-    tenseGrid.innerHTML = TENSE_ORDER.map(t => `
+    tenseGrid.innerHTML = Object.entries(lessonData.tense_names).map(([t, label]) => `
       <label class="flex items-center gap-2 cursor-pointer select-none">
         <input type="checkbox" class="tense-cb w-4 h-4 accent-violet-600"
                value="${t}" checked onchange="updateQCount()" />
-        <span class="font-medium text-slate-700">${lessonData.tense_names[t]}</span>
+        <span class="font-medium text-slate-700">${label}</span>
       </label>`).join('');
 
     // Verbs
@@ -242,7 +242,7 @@
   function updateQCount() {
     const tenses = [...document.querySelectorAll('.tense-cb:checked')].map(c => c.value);
     const verbs  = [...document.querySelectorAll('.verb-cb:checked')].map(c => c.value);
-    const count  = tenses.length * verbs.length * 6;  // 6 pronouns
+    const count  = tenses.length * verbs.length * lessonData.pronouns.length;
     document.getElementById('q-count-label').textContent =
       `${count} question${count !== 1 ? 's' : ''} selected`;
   }

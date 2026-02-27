@@ -245,8 +245,9 @@ def api_conj(lesson_id: str, token: str | None = Cookie(default=None)):
     if not lesson:
         raise HTTPException(404)
     return {"title": lesson["title"], "subtitle": lesson["subtitle"],
-            "verbs": lesson["verbs"], "tense_names": TENSE_NAMES,
-            "pronouns": PRONOUNS}
+            "verbs": lesson["verbs"],
+            "tense_names": lesson.get("tense_names", TENSE_NAMES),
+            "pronouns": lesson.get("pronouns", PRONOUNS)}
 
 
 # ── Event recording API ──────────────────────────────────────────────────────
