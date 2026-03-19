@@ -407,6 +407,362 @@ CONDITIONAL_VERBS: dict[str, dict] = {
 }
 # fmt: on
 
+# ── Vocabulary: Lección 4 — El Mundo del Trabajo ─────────────────────────────
+
+VOCABULARY_L4 = {
+    # Las Ocupaciones / los Títulos
+    "el/la abogado/a": ["lawyer"], "el actor": ["actor"],
+    "la actriz": ["actress"], "el/la arqueólogo/a": ["archaeologist"],
+    "el/la arquitecto/a": ["architect"], "el/la bombero/a": ["firefighter"],
+    "el/la carpintero/a": ["carpenter"], "el/la científico/a": ["scientist"],
+    "el/la cocinero/a": ["cook", "chef"], "el/la consejero/a": ["counselor", "advisor"],
+    "el/la contador/a": ["accountant"],
+    "el/la corredor/a de bolsa": ["stockbroker"],
+    "el/la diseñador/a": ["designer"], "el/la electricista": ["electrician"],
+    "el hombre de negocios": ["businessman"],
+    "la mujer de negocios": ["businesswoman"],
+    "el/la maestro/a": ["teacher"], "el/la profesor/a": ["professor", "teacher"],
+    "el/la peluquero/a": ["hairdresser", "barber"],
+    "el/la pintor/a": ["painter"], "el/la político/a": ["politician"],
+    "el/la psicólogo/a": ["psychologist"], "el/la reportero/a": ["reporter"],
+    "el/la periodista": ["journalist"], "el/la secretario/a": ["secretary"],
+    "el/la técnico/a": ["technician"], "el/la doctor/a": ["doctor"],
+    "el/la enfermero/a": ["nurse"], "el/la dentista": ["dentist"],
+    # Campos de Estudio
+    "derecho": ["law"], "actuación": ["acting"],
+    "arqueología": ["archaeology"], "culinaria": ["culinary arts"],
+    "consejería": ["counseling"], "economía": ["economics"],
+    "diseño": ["design"], "periodismo": ["journalism"],
+    "medicina": ["medicine"], "odontología": ["dentistry"],
+    # El Mundo del Trabajo
+    "el ascenso": ["promotion", "raise"], "la promoción": ["promotion"],
+    "el aumento": ["raise", "increase"],
+    "el sueldo": ["salary", "wage"], "el salario": ["salary"],
+    "la carrera": ["career"], "la compañía": ["company"],
+    "la empresa": ["company", "business"], "la firma": ["firm", "signature"],
+    "el empleo": ["job", "employment"], "el puesto": ["position", "job"],
+    "el/la gerente": ["manager"], "el/la jefe/a": ["boss"],
+    "los negocios": ["business"], "la ocupación": ["occupation"],
+    "el oficio": ["trade", "craft"], "el título": ["degree", "title"],
+    "la profesión": ["profession"], "la reunión": ["meeting"],
+    "el teletrabajo": ["remote work", "telework"],
+    "el trabajo": ["work", "job"], "la oficina": ["office"],
+    "comercial": ["commercial"], "dentro de": ["within"],
+    "próximo": ["next"], "vacaciones": ["vacation"],
+    "sobresueldo": ["bonus"],
+    # La Entrevista
+    "el anuncio": ["advertisement", "announcement"],
+    "el/la aspirante": ["applicant", "candidate"],
+    "los beneficios": ["benefits"],
+    "el currículo": ["résumé", "CV"], "la hoja de vida": ["résumé", "CV"],
+    "la entrevista": ["interview"],
+    "el entrevistado": ["interviewee"], "el entrevistador": ["interviewer"],
+    "la solicitud de trabajo": ["job application"],
+    # Verbos
+    "ascender": ["to promote", "to rise"], "graduarse": ["to graduate"],
+    "contratar": ["to hire"], "entrevistar": ["to interview"],
+    "ganar": ["to earn", "to win"], "obtener": ["to obtain", "to get"],
+    "solicitar": ["to apply for", "to request"], "defender": ["to defend"],
+    "estudiar": ["to study"], "aplicar": ["to apply"],
+    "buscar": ["to search", "to look for"],
+    "aumentar": ["to increase", "to raise"], "emplear": ["to employ"],
+    "negociar": ["to negotiate"],
+    "reunirse": ["to meet", "to get together"], "trabajar": ["to work"],
+    "dejar": ["to leave", "to quit"], "despedir": ["to fire", "to dismiss"],
+    "invertir": ["to invest"], "aceptar": ["to accept"],
+    "renunciar": ["to resign", "to give up"],
+    "tener éxito": ["to succeed", "to be successful"],
+    "comerciar": ["to trade"],
+}
+
+# ── Vocabulary: Lección 6 — Los Medios de Comunicación ───────────────────────
+
+VOCABULARY_L6 = {
+    # Los Medios de Comunicación
+    "el acontecimiento": ["event"], "la actualidad": ["current events", "present time"],
+    "las noticias": ["news"], "noticias de última hora": ["breaking news"],
+    "el artículo": ["article"], "el diario": ["newspaper", "diary"],
+    "el periódico": ["newspaper"], "el informe": ["report"],
+    "el locutor": ["announcer", "broadcaster"],
+    "la locutora": ["announcer", "broadcaster"],
+    "el noticiero": ["newscast", "news program"], "la prensa": ["press"],
+    "el reportaje": ["report", "news story"], "el radio": ["radio"],
+    # Las Noticias
+    "el choque": ["crash", "collision"], "el crimen": ["crime"],
+    "el desastre natural": ["natural disaster"],
+    "el terremoto": ["earthquake"], "el maremoto": ["tsunami", "tidal wave"],
+    "la tormenta": ["storm"], "el tornado": ["tornado"],
+    "el huracán": ["hurricane"], "el incendio": ["fire"],
+    "el empleo": ["employment"], "el desempleo": ["unemployment"],
+    "la desigualdad": ["inequality"], "la discriminación": ["discrimination"],
+    "el ejército": ["army"], "la huelga": ["strike"],
+    "el paro": ["strike", "unemployment"], "el secuestro": ["kidnapping"],
+    "la inundación": ["flood"], "la libertad": ["freedom", "liberty"],
+    "la guerra": ["war"], "la paz": ["peace"],
+    "el racismo": ["racism"], "el sexismo": ["sexism"],
+    "el SIDA": ["AIDS"], "el soldado": ["soldier"],
+    "la violencia": ["violence"], "el policía": ["police officer"],
+    "el peligro": ["danger"],
+    # La Política
+    "el candidato": ["candidate"], "la candidata": ["candidate"],
+    "el ciudadano": ["citizen"], "el deber": ["duty"],
+    "los derechos": ["rights"], "la dictadura": ["dictatorship"],
+    "la opresión": ["oppression"], "el atraco": ["robbery", "mugging"],
+    "el engaño": ["deceit", "fraud"], "el discurso": ["speech"],
+    "las elecciones": ["elections"], "la encuesta": ["survey", "poll"],
+    "la entrevista": ["interview"], "los impuestos": ["taxes"],
+    "el representante": ["representative"], "internacional": ["international"],
+    "el voto": ["vote"],
+    # Expresiones Útiles
+    "¡Qué gusto!": ["What a pleasure!"], "¡Mucho gusto!": ["Nice to meet you!"],
+    "¡No tenía ni idea!": ["I had no idea!"],
+    "¡Felicidades!": ["Congratulations!"], "¡Enhorabuena!": ["Congratulations!"],
+    "¡La he pasado de película!": ["I had an amazing time!"],
+    "¡Me suena excelente!": ["Sounds great to me!"],
+    # Verbos
+    "anunciar": ["to announce"], "comunicarse": ["to communicate"],
+    "durar": ["to last"], "votar": ["to vote"],
+    "elegir": ["to choose", "to elect"], "informar": ["to inform"],
+    "ocurrir": ["to occur", "to happen"],
+    "transmitir": ["to transmit", "to broadcast"],
+    "emitir": ["to emit", "to broadcast"], "declarar": ["to declare"],
+    "luchar": ["to fight", "to struggle"],
+    "seguir": ["to follow", "to continue"],
+    "cumplir": ["to fulfill", "to comply"], "obedecer": ["to obey"],
+    "despedirse": ["to say goodbye"],
+}
+
+# ── Compound tenses (Lessons 3 & 4) ──────────────────────────────────────────
+
+COMPOUND_TENSE_NAMES = {
+    "present_perfect":             "Presente Perfecto de Indicativo",
+    "pluperfect_indicative":       "Pluscuamperfecto de Indicativo",
+    "future_perfect":              "Futuro Perfecto de Indicativo",
+    "conditional_perfect":         "Condicional Perfecto",
+    "present_perfect_subjunctive": "Presente Perfecto del Subjuntivo",
+    "pluperfect_subjunctive":      "Pluscuamperfecto del Subjuntivo",
+}
+
+_HABER: dict[str, list[str]] = {
+    "present_perfect":             ["he",      "has",      "ha",      "hemos",      "habéis",    "han"],
+    "pluperfect_indicative":       ["había",   "habías",   "había",   "habíamos",   "habíais",   "habían"],
+    "future_perfect":              ["habré",   "habrás",   "habrá",   "habremos",   "habréis",   "habrán"],
+    "conditional_perfect":         ["habría",  "habrías",  "habría",  "habríamos",  "habríais",  "habrían"],
+    "present_perfect_subjunctive": ["haya",    "hayas",    "haya",    "hayamos",    "hayáis",    "hayan"],
+    "pluperfect_subjunctive":      ["hubiera", "hubieras", "hubiera", "hubiéramos", "hubierais", "hubieran"],
+}
+_REFLEXIVE_PRONOUNS = ["me", "te", "se", "nos", "os", "se"]
+
+
+def _compound(participle: str, reflexive: bool = False) -> dict[str, dict[str, str]]:
+    """Generate all 6 compound-tense conjugations from a past participle."""
+    result: dict[str, dict[str, str]] = {}
+    for tense, forms in _HABER.items():
+        d: dict[str, str] = {}
+        for i, p in enumerate(PRONOUNS):
+            if reflexive:
+                d[p] = f"{_REFLEXIVE_PRONOUNS[i]} {forms[i]} {participle}"
+            else:
+                d[p] = f"{forms[i]} {participle}"
+        result[tense] = d
+    return result
+
+
+# ── Lección 4 compound-tense verbs ──────────────────────────────────────────
+
+L4_COMPOUND_VERBS: dict[str, dict] = {
+    "ascender": {
+        "english": "to promote / rise",
+        "sentence": "{ascender} a un puesto más alto en la empresa.",
+        **_compound("ascendido"),
+    },
+    "graduarse": {
+        "english": "to graduate",
+        "sentence": "{graduarse} de la universidad con honores.",
+        **_compound("graduado", reflexive=True),
+    },
+    "contratar": {
+        "english": "to hire",
+        "sentence": "{contratar} a un nuevo empleado para la oficina.",
+        **_compound("contratado"),
+    },
+    "entrevistar": {
+        "english": "to interview",
+        "sentence": "{entrevistar} a los aspirantes para el puesto.",
+        **_compound("entrevistado"),
+    },
+    "ganar": {
+        "english": "to earn / win",
+        "sentence": "{ganar} un buen sueldo en la compañía.",
+        **_compound("ganado"),
+    },
+    "obtener": {
+        "english": "to obtain / get",
+        "sentence": "{obtener} el título de abogado después de estudiar derecho.",
+        **_compound("obtenido"),
+    },
+    "solicitar": {
+        "english": "to apply for / request",
+        "sentence": "{solicitar} el empleo en la empresa internacional.",
+        **_compound("solicitado"),
+    },
+    "defender": {
+        "english": "to defend",
+        "sentence": "{defender} los derechos de los trabajadores.",
+        **_compound("defendido"),
+    },
+    "estudiar": {
+        "english": "to study",
+        "sentence": "{estudiar} economía en la universidad.",
+        **_compound("estudiado"),
+    },
+    "aplicar": {
+        "english": "to apply",
+        "sentence": "{aplicar} los conocimientos en el trabajo.",
+        **_compound("aplicado"),
+    },
+    "buscar": {
+        "english": "to search / look for",
+        "sentence": "{buscar} un puesto mejor en otra compañía.",
+        **_compound("buscado"),
+    },
+    "aumentar": {
+        "english": "to increase / raise",
+        "sentence": "{aumentar} la producción de la empresa.",
+        **_compound("aumentado"),
+    },
+    "emplear": {
+        "english": "to employ",
+        "sentence": "{emplear} a más técnicos en la firma.",
+        **_compound("empleado"),
+    },
+    "negociar": {
+        "english": "to negotiate",
+        "sentence": "{negociar} un mejor salario con el gerente.",
+        **_compound("negociado"),
+    },
+    "reunirse": {
+        "english": "to meet / get together",
+        "sentence": "{reunirse} con el equipo para la videoconferencia.",
+        **_compound("reunido", reflexive=True),
+    },
+    "trabajar": {
+        "english": "to work",
+        "sentence": "{trabajar} desde casa con el teletrabajo.",
+        **_compound("trabajado"),
+    },
+    "dejar": {
+        "english": "to leave / quit",
+        "sentence": "{dejar} el puesto para aceptar una oferta mejor.",
+        **_compound("dejado"),
+    },
+    "despedir": {
+        "english": "to fire / dismiss",
+        "sentence": "{despedir} al empleado por bajo rendimiento.",
+        **_compound("despedido"),
+    },
+    "invertir": {
+        "english": "to invest",
+        "sentence": "{invertir} en los negocios internacionales.",
+        **_compound("invertido"),
+    },
+    "aceptar": {
+        "english": "to accept",
+        "sentence": "{aceptar} la oferta de trabajo después de la entrevista.",
+        **_compound("aceptado"),
+    },
+    "renunciar": {
+        "english": "to resign / give up",
+        "sentence": "{renunciar} al empleo para empezar su propia empresa.",
+        **_compound("renunciado"),
+    },
+    "comerciar": {
+        "english": "to trade",
+        "sentence": "{comerciar} con empresas de otros países.",
+        **_compound("comerciado"),
+    },
+}
+
+# ── Lección 6 compound-tense verbs ──────────────────────────────────────────
+
+L6_COMPOUND_VERBS: dict[str, dict] = {
+    "anunciar": {
+        "english": "to announce",
+        "sentence": "{anunciar} las noticias de última hora en el noticiero.",
+        **_compound("anunciado"),
+    },
+    "comunicarse": {
+        "english": "to communicate",
+        "sentence": "{comunicarse} con los ciudadanos por la prensa.",
+        **_compound("comunicado", reflexive=True),
+    },
+    "durar": {
+        "english": "to last",
+        "sentence": "{durar} mucho tiempo la huelga de los trabajadores.",
+        **_compound("durado"),
+    },
+    "votar": {
+        "english": "to vote",
+        "sentence": "{votar} en las elecciones presidenciales.",
+        **_compound("votado"),
+    },
+    "elegir": {
+        "english": "to choose / elect",
+        "sentence": "{elegir} al mejor candidato en las elecciones.",
+        **_compound("elegido"),
+    },
+    "informar": {
+        "english": "to inform",
+        "sentence": "{informar} al público sobre el desastre natural.",
+        **_compound("informado"),
+    },
+    "ocurrir": {
+        "english": "to occur / happen",
+        "sentence": "{ocurrir} un terremoto en la región.",
+        **_compound("ocurrido"),
+    },
+    "transmitir": {
+        "english": "to transmit / broadcast",
+        "sentence": "{transmitir} el discurso del representante por la radio.",
+        **_compound("transmitido"),
+    },
+    "emitir": {
+        "english": "to emit / broadcast",
+        "sentence": "{emitir} un informe sobre la violencia en el país.",
+        **_compound("emitido"),
+    },
+    "declarar": {
+        "english": "to declare",
+        "sentence": "{declarar} la paz después de la guerra.",
+        **_compound("declarado"),
+    },
+    "luchar": {
+        "english": "to fight / struggle",
+        "sentence": "{luchar} por la libertad y los derechos del ciudadano.",
+        **_compound("luchado"),
+    },
+    "seguir": {
+        "english": "to follow / continue",
+        "sentence": "{seguir} las noticias sobre la situación internacional.",
+        **_compound("seguido"),
+    },
+    "cumplir": {
+        "english": "to fulfill / comply",
+        "sentence": "{cumplir} con el deber de votar en las elecciones.",
+        **_compound("cumplido"),
+    },
+    "obedecer": {
+        "english": "to obey",
+        "sentence": "{obedecer} las leyes del país para mantener la paz.",
+        **_compound("obedecido"),
+    },
+    "despedirse": {
+        "english": "to say goodbye",
+        "sentence": "{despedirse} de los colegas al final del reportaje.",
+        **_compound("despedido", reflexive=True),
+    },
+}
+
 # ── Lessons ───────────────────────────────────────────────────────────────────
 
 LESSONS = {
@@ -415,6 +771,16 @@ LESSONS = {
             "title": "Lesson 1",
             "subtitle": "Un Festival de Arte",
             "words": VOCABULARY,
+        },
+        "2": {
+            "title": "Lesson 2",
+            "subtitle": "El Mundo del Trabajo",
+            "words": VOCABULARY_L4,
+        },
+        "3": {
+            "title": "Lesson 3",
+            "subtitle": "Los Medios de Comunicación",
+            "words": VOCABULARY_L6,
         },
     },
     "conjugation": {
@@ -431,6 +797,20 @@ LESSONS = {
             "verbs": CONDITIONAL_VERBS,
             "pronouns": CONDITIONAL_PRONOUNS,
             "tense_names": CONDITIONAL_TENSE,
+        },
+        "3": {
+            "title": "Lesson 3",
+            "subtitle": "Tiempos Compuestos — El Trabajo",
+            "verbs": L4_COMPOUND_VERBS,
+            "pronouns": PRONOUNS,
+            "tense_names": COMPOUND_TENSE_NAMES,
+        },
+        "4": {
+            "title": "Lesson 4",
+            "subtitle": "Tiempos Compuestos — Los Medios",
+            "verbs": L6_COMPOUND_VERBS,
+            "pronouns": PRONOUNS,
+            "tense_names": COMPOUND_TENSE_NAMES,
         },
     },
 }
