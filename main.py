@@ -145,6 +145,7 @@ def index(request: Request, token: str | None = Cookie(default=None)):
     return templates.TemplateResponse("index.html", {
         "request": request, "user": user,
         "total_words": total_words,
+        "total_numbers": len(LESSONS["vocabulary"]["4"]["words"]),
         "total_verbs": len(ALL_CONJUGATION_VERBS),
         "total_tenses": len(ALL_TENSE_NAMES),
     })

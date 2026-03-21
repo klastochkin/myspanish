@@ -161,6 +161,12 @@
       });
   }
 
+  // Auto-start if ?start=N is present in the URL
+  document.addEventListener('DOMContentLoaded', () => {
+    const start = new URLSearchParams(window.location.search).get('start');
+    if (start) selectLesson(start);
+  });
+
   function startQuiz() {
     currentIdx = 0; correct = 0; wrongItems = [];
     showScreen('quiz');
