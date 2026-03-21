@@ -4,40 +4,24 @@
 
 {% block content %}
 
-<!-- ── Screen: Lesson select ──────────────────────────────────────────────── -->
-<div id="screen-select" class="fade-up">
-  <h1 class="text-2xl font-bold mb-1">Conjugations</h1>
-  <p class="text-slate-500 mb-6">Choose a lesson to practice</p>
-  <div class="grid gap-4">
-    {% for lesson in lessons %}
-    <button onclick="selectLesson('{{ lesson.id }}')"
-            class="group text-left bg-white rounded-2xl shadow-sm border border-slate-100 p-6
-                   hover:shadow-md hover:border-violet-200 transition-all duration-200">
-      <div class="flex items-center justify-between">
-        <div>
-          <h3 class="text-lg font-bold text-slate-800 group-hover:text-violet-700 transition">{{ lesson.title }}</h3>
-          <p class="text-slate-500 text-sm mt-0.5">{{ lesson.subtitle }}</p>
-        </div>
-        <span class="text-xs font-semibold text-violet-500 bg-violet-50 px-3 py-1 rounded-full whitespace-nowrap">
-          {{ lesson.count }} verbs
-        </span>
-      </div>
-    </button>
-    {% endfor %}
-  </div>
+<!-- ── Screen: Loading ─────────────────────────────────────────────────────── -->
+<div id="screen-loading" class="fade-up text-center py-16 text-slate-400">
+  Loading verbs…
 </div>
 
 <!-- ── Screen: Config (tense + verb select) ───────────────────────────────── -->
 <div id="screen-config" class="hidden fade-up">
-  <button onclick="backToSelect()" class="text-sm text-slate-400 hover:text-violet-600 transition mb-5 flex items-center gap-1">
-    ← Back
-  </button>
-  <h2 class="text-xl font-bold mb-5">Configure Practice</h2>
+  <h2 class="text-xl font-bold mb-1">Conjugations</h2>
+  <p class="text-slate-500 text-sm mb-5">Select tenses and verbs, then start</p>
 
   <!-- Tenses -->
   <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 mb-4">
-    <h3 class="text-sm font-bold uppercase tracking-wide text-slate-400 mb-4">Tenses</h3>
-    <div class="grid grid-cols-2 gap-3" id="tense-grid"></div>
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-sm font-bold uppercase tracking-wide text-slate-400">Tenses</h3>
+      <button onclick="toggleAllTenses()" id="btn-toggle-tenses"
+              class="text-xs text-violet-600 hover:text-violet-800 font-semibold transition">Deselect All</button>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="tense-grid"></div>
   </div>
 
   <!-- Verbs -->
@@ -47,7 +31,7 @@
       <button onclick="toggleAllVerbs()" id="btn-toggle-verbs"
               class="text-xs text-violet-600 hover:text-violet-800 font-semibold transition">Deselect All</button>
     </div>
-    <div class="grid grid-cols-2 gap-2" id="verb-grid"></div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="verb-grid"></div>
   </div>
 
   <p class="text-center text-slate-400 text-sm mb-4" id="q-count-label"></p>
@@ -87,10 +71,7 @@
         <span class="text-slate-300">·</span>
         <span id="q-pronoun" class="text-slate-600"></span>
       </div>
-
-      <!-- Example sentence -->
       <div class="bg-slate-50 rounded-xl px-4 py-3 mb-6 text-sm text-slate-600 italic" id="q-sentence"></div>
-
       <p class="text-slate-400 text-xs mb-2">Type the conjugated form (accents optional)</p>
       <input id="answer-input" type="text" autocomplete="off" autocorrect="off" spellcheck="false"
              placeholder="Your conjugation…"
@@ -142,9 +123,9 @@
       <button onclick="reconfig()"
               class="w-full bg-violet-600 hover:bg-violet-700 text-white font-semibold
                      py-3 rounded-xl transition">Try Again</button>
-      <button onclick="backToSelect()"
-              class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold
-                     py-3 rounded-xl transition">Back to Lessons</button>
+      <a href="/"
+         class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold
+                py-3 rounded-xl transition text-center block">Back to Home</a>
     </div>
   </div>
 </div>
@@ -154,14 +135,13 @@
 {% block head %}
 <script>
   // ── State ──────────────────────────────────────────────────────────────────
-  let lessonData    = null;   // raw API response
-  let questions     = [];     // [{verb, english, sentence, tense, tenseName, pronoun, correct}]
-  let currentIdx    = 0;
-  let correct       = 0;
-  let wrongItems    = [];
-  let currentLesson = null;
-
-  // TENSE_ORDER is derived dynamically from lessonData.tense_names at load time
+  let lessonData   = null;
+  let questions    = [];
+  let currentIdx   = 0;
+  let correct      = 0;
+  let wrongItems   = [];
+  let allTensesOn  = true;
+  let allVerbsOn   = true;
 
   // ── Utilities ──────────────────────────────────────────────────────────────
   function norm(s) {
@@ -174,75 +154,87 @@
       [arr[i], arr[j]] = [arr[j], arr[i]];
     }
   }
-  function show(id)   { document.getElementById(id).classList.remove('hidden'); }
-  function hide(id)   { document.getElementById(id).classList.add('hidden'); }
+  function show(id)       { document.getElementById(id).classList.remove('hidden'); }
+  function hide(id)       { document.getElementById(id).classList.add('hidden'); }
   function setText(id, t) { document.getElementById(id).textContent = t; }
   function setHTML(id, h) { document.getElementById(id).innerHTML = h; }
 
   function showScreen(name) {
-    ['screen-select','screen-config','screen-quiz','screen-results'].forEach(s => hide(s));
+    ['screen-loading','screen-config','screen-quiz','screen-results'].forEach(s => hide(s));
     show('screen-' + name);
   }
-  function backToSelect() { showScreen('select'); }
 
-  // Build sentence: prepend pronoun, highlight {verb} in violet
   function buildSentence(template, pronoun) {
     const subject = pronoun.charAt(0).toUpperCase() + pronoun.slice(1);
-    const sentence = subject + ' ' + template;
-    return sentence.replace(/\{(\w+)\}/g,
+    return (subject + ' ' + template).replace(/\{(\w+)\}/g,
       '<span class="not-italic font-semibold text-violet-600">{$1}</span>');
   }
 
-  // ── Load lesson ────────────────────────────────────────────────────────────
-  function selectLesson(id) {
-    currentLesson = id;
-    fetch(`/api/conjugation/${id}`)
+  // ── Load all verbs on page load ────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    fetch('/api/conjugation/all')
       .then(r => r.json())
       .then(data => {
         lessonData = data;
         buildConfigScreen();
         showScreen('config');
       });
-  }
+  });
 
   // ── Config screen ──────────────────────────────────────────────────────────
-  let allVerbsSelected = true;
-
   function buildConfigScreen() {
-    // Tenses — built from the lesson's own tense_names (works for any lesson)
-    const tenseGrid = document.getElementById('tense-grid');
-    tenseGrid.innerHTML = Object.entries(lessonData.tense_names).map(([t, label]) => `
-      <label class="flex items-center gap-2 cursor-pointer select-none">
-        <input type="checkbox" class="tense-cb w-4 h-4 accent-violet-600"
-               value="${t}" checked onchange="updateQCount()" />
-        <span class="font-medium text-slate-700">${label}</span>
-      </label>`).join('');
+    // Tenses
+    document.getElementById('tense-grid').innerHTML =
+      Object.entries(lessonData.tense_names).map(([t, label]) => `
+        <label class="flex items-center gap-2 cursor-pointer select-none">
+          <input type="checkbox" class="tense-cb w-4 h-4 accent-violet-600"
+                 value="${t}" checked onchange="updateQCount()" />
+          <span class="font-medium text-slate-700 text-sm">${label}</span>
+        </label>`).join('');
 
     // Verbs
-    const verbGrid = document.getElementById('verb-grid');
-    verbGrid.innerHTML = Object.entries(lessonData.verbs).map(([v, info]) => `
-      <label class="flex items-center gap-2 cursor-pointer select-none text-sm">
-        <input type="checkbox" class="verb-cb w-4 h-4 accent-violet-600"
-               value="${v}" checked onchange="updateQCount()" />
-        <span class="text-slate-700">${v}</span>
-      </label>`).join('');
+    document.getElementById('verb-grid').innerHTML =
+      Object.entries(lessonData.verbs).map(([v, info]) => `
+        <label class="flex items-center gap-2 cursor-pointer select-none text-sm">
+          <input type="checkbox" class="verb-cb w-4 h-4 accent-violet-600"
+                 value="${v}" checked onchange="updateQCount()" />
+          <span class="text-slate-700">${v}</span>
+        </label>`).join('');
 
-    allVerbsSelected = true;
+    allTensesOn = true;
+    allVerbsOn  = true;
+    updateQCount();
+  }
+
+  function toggleAllTenses() {
+    allTensesOn = !allTensesOn;
+    document.querySelectorAll('.tense-cb').forEach(cb => cb.checked = allTensesOn);
+    document.getElementById('btn-toggle-tenses').textContent =
+      allTensesOn ? 'Deselect All' : 'Select All';
     updateQCount();
   }
 
   function toggleAllVerbs() {
-    allVerbsSelected = !allVerbsSelected;
-    document.querySelectorAll('.verb-cb').forEach(cb => cb.checked = allVerbsSelected);
+    allVerbsOn = !allVerbsOn;
+    document.querySelectorAll('.verb-cb').forEach(cb => cb.checked = allVerbsOn);
     document.getElementById('btn-toggle-verbs').textContent =
-      allVerbsSelected ? 'Deselect All' : 'Select All';
+      allVerbsOn ? 'Deselect All' : 'Select All';
     updateQCount();
   }
 
   function updateQCount() {
     const tenses = [...document.querySelectorAll('.tense-cb:checked')].map(c => c.value);
     const verbs  = [...document.querySelectorAll('.verb-cb:checked')].map(c => c.value);
-    const count  = tenses.length * verbs.length * lessonData.pronouns.length;
+    let count = 0;
+    for (const verb of verbs) {
+      const info = lessonData.verbs[verb];
+      for (const tense of tenses) {
+        if (!info[tense]) continue;
+        for (const pronoun of lessonData.pronouns) {
+          if (info[tense][pronoun]) count++;
+        }
+      }
+    }
     document.getElementById('q-count-label').textContent =
       `${count} question${count !== 1 ? 's' : ''} selected`;
   }
@@ -262,15 +254,24 @@
     for (const verb of verbs) {
       const info = lessonData.verbs[verb];
       for (const tense of tenses) {
+        if (!info[tense]) continue;   // verb doesn't have this tense — skip
         for (const pronoun of lessonData.pronouns) {
+          const form = info[tense][pronoun];
+          if (!form) continue;        // pronoun not defined for this tense — skip
           questions.push({
             verb, english: info.english, sentence: info.sentence,
             tense, tenseName: lessonData.tense_names[tense],
-            pronoun, correct: info[tense][pronoun],
+            pronoun, correct: form,
           });
         }
       }
     }
+
+    if (!questions.length) {
+      alert('No questions available for the selected combination.');
+      return;
+    }
+
     shuffle(questions);
     currentIdx = 0; correct = 0; wrongItems = [];
     showScreen('quiz');
@@ -332,9 +333,7 @@
     showFeedback(ok, q);
   }
 
-  function skipQuestion() {
-    showFeedback(null, questions[currentIdx]);
-  }
+  function skipQuestion() { showFeedback(null, questions[currentIdx]); }
 
   // ── Feedback ───────────────────────────────────────────────────────────────
   function showFeedback(ok, q) {
@@ -359,15 +358,9 @@
       setText('fb-correct', 'Correct form:');
     }
     setText('fb-answer', q.correct);
-    // Show fully resolved sentence in feedback
-    const resolved = buildSentence(q.sentence, q.pronoun)
-      .replace(/\{(\w+)\}/g, `<span class="not-italic font-semibold text-emerald-600">${q.correct}</span>`);
-    // Replace the {verb} placeholder with the correct conjugation
-    const sentenceResolved = (() => {
-      const subject = q.pronoun.charAt(0).toUpperCase() + q.pronoun.slice(1);
-      return (subject + ' ' + q.sentence).replace(/\{\w+\}/, `<strong>${q.correct}</strong>`);
-    })();
-    setHTML('fb-sentence', sentenceResolved);
+    const subject = q.pronoun.charAt(0).toUpperCase() + q.pronoun.slice(1);
+    setHTML('fb-sentence', (subject + ' ' + q.sentence).replace(/\{\w+\}/,
+      `<strong>${q.correct}</strong>`));
   }
 
   function nextQuestion() {

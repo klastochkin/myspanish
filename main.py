@@ -15,7 +15,7 @@ from auth import (
     set_password,
     verify_user,
 )
-from data import LESSONS, PRONOUNS, TENSE_NAMES
+from data import ALL_CONJUGATION_VERBS, ALL_TENSE_NAMES, LESSONS, PRONOUNS, TENSE_NAMES
 from users import USERS
 
 app = FastAPI()
@@ -141,8 +141,13 @@ def index(request: Request, token: str | None = Cookie(default=None)):
     user = _get_user(token)
     if not user:
         return RedirectResponse("/login", status_code=303)
-    return templates.TemplateResponse("index.html",
-                                      {"request": request, "user": user})
+    total_words = sum(len(v["words"]) for v in LESSONS["vocabulary"].values())
+    return templates.TemplateResponse("index.html", {
+        "request": request, "user": user,
+        "total_words": total_words,
+        "total_verbs": len(ALL_CONJUGATION_VERBS),
+        "total_tenses": len(ALL_TENSE_NAMES),
+    })
 
 
 @app.get("/vocabulary", response_class=HTMLResponse)
@@ -165,14 +170,7 @@ def conjugation(request: Request, token: str | None = Cookie(default=None)):
     user = _get_user(token)
     if not user:
         return RedirectResponse("/login", status_code=303)
-    lessons = [
-        {"id": k, "title": v["title"], "subtitle": v["subtitle"],
-         "count": len(v["verbs"])}
-        for k, v in LESSONS["conjugation"].items()
-    ]
-    return templates.TemplateResponse("conj.html",
-                                      {"request": request, "lessons": lessons,
-                                       "user": user})
+    return templates.TemplateResponse("conj.html", {"request": request, "user": user})
 
 
 # ── Supervisor ────────────────────────────────────────────────────────────────
@@ -235,6 +233,17 @@ def api_vocab(lesson_id: str, token: str | None = Cookie(default=None)):
         raise HTTPException(404)
     return {"title": lesson["title"], "subtitle": lesson["subtitle"],
             "words": lesson["words"]}
+
+
+@app.get("/api/conjugation/all")
+def api_conj_all(token: str | None = Cookie(default=None)):
+    if not _get_user(token):
+        raise HTTPException(403)
+    return {
+        "verbs":       ALL_CONJUGATION_VERBS,
+        "tense_names": ALL_TENSE_NAMES,
+        "pronouns":    PRONOUNS,
+    }
 
 
 @app.get("/api/conjugation/{lesson_id}")

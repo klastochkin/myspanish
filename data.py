@@ -407,6 +407,112 @@ CONDITIONAL_VERBS: dict[str, dict] = {
 }
 # fmt: on
 
+# ── Vocabulary: Un Sinnúmero de Números ──────────────────────────────────────
+
+VOCABULARY_NUMBERS = {
+    # ── Cardinal numbers ──────────────────────────────────────────────────────
+    "cero":              ["zero", "0"],
+    "uno / un":          ["one", "1"],
+    "dos":               ["two", "2"],
+    "tres":              ["three", "3"],
+    "cuatro":            ["four", "4"],
+    "cinco":             ["five", "5"],
+    "seis":              ["six", "6"],
+    "siete":             ["seven", "7"],
+    "ocho":              ["eight", "8"],
+    "nueve":             ["nine", "9"],
+    "diez":              ["ten", "10"],
+    "once":              ["eleven", "11"],
+    "doce":              ["twelve", "12"],
+    "trece":             ["thirteen", "13"],
+    "catorce":           ["fourteen", "14"],
+    "quince":            ["fifteen", "15"],
+    "dieciséis":         ["sixteen", "16"],
+    "diecisiete":        ["seventeen", "17"],
+    "dieciocho":         ["eighteen", "18"],
+    "diecinueve":        ["nineteen", "19"],
+    "veinte":            ["twenty", "20"],
+    "veintiuno":         ["twenty-one", "21"],
+    "veintidós":         ["twenty-two", "22"],
+    "veintitrés":        ["twenty-three", "23"],
+    "treinta":           ["thirty", "30"],
+    "cuarenta":          ["forty", "40"],
+    "cincuenta":         ["fifty", "50"],
+    "sesenta":           ["sixty", "60"],
+    "setenta":           ["seventy", "70"],
+    "ochenta":           ["eighty", "80"],
+    "noventa":           ["ninety", "90"],
+    "cien / ciento":     ["one hundred", "100", "hundred"],
+    "doscientos":        ["two hundred", "200"],
+    "trescientos":       ["three hundred", "300"],
+    "cuatrocientos":     ["four hundred", "400"],
+    "quinientos":        ["five hundred", "500"],
+    "seiscientos":       ["six hundred", "600"],
+    "setecientos":       ["seven hundred", "700"],
+    "ochocientos":       ["eight hundred", "800"],
+    "novecientos":       ["nine hundred", "900"],
+    "mil":               ["one thousand", "1000", "thousand"],
+    "dos mil":           ["two thousand", "2000"],
+    "tres mil":          ["three thousand", "3000"],
+    "diez mil":          ["ten thousand", "10000"],
+    "cien mil":          ["one hundred thousand", "100000"],
+    "quinientos mil":    ["five hundred thousand", "500000"],
+    "un millón":         ["one million", "1000000"],
+    # ── Ordinal numbers ───────────────────────────────────────────────────────
+    "primero / primer":          ["first", "1st"],
+    "segundo":                   ["second", "2nd"],
+    "tercero / tercer":          ["third", "3rd"],
+    "cuarto":                    ["fourth", "4th"],
+    "quinto":                    ["fifth", "5th"],
+    "sexto":                     ["sixth", "6th"],
+    "séptimo":                   ["seventh", "7th"],
+    "octavo":                    ["eighth", "8th"],
+    "noveno":                    ["ninth", "9th"],
+    "décimo":                    ["tenth", "10th"],
+    "undécimo":                  ["eleventh", "11th"],
+    "duodécimo":                 ["twelfth", "12th"],
+    "decimotercero":             ["thirteenth", "13th"],
+    "decimocuarto":              ["fourteenth", "14th"],
+    "decimoquinto":              ["fifteenth", "15th"],
+    "decimosexto":               ["sixteenth", "16th"],
+    "decimoséptimo":             ["seventeenth", "17th"],
+    "decimoctavo":               ["eighteenth", "18th"],
+    "decimonoveno":              ["nineteenth", "19th"],
+    "vigésimo":                  ["twentieth", "20th"],
+    "vigésimo primero":          ["twenty-first", "21st"],
+    "vigésimo segundo":          ["twenty-second", "22nd"],
+    "vigésimo tercero":          ["twenty-third", "23rd"],
+    "trigésimo":                 ["thirtieth", "30th"],
+    "trigésimo primero":         ["thirty-first", "31st"],
+    "trigésimo segundo":         ["thirty-second", "32nd"],
+    "trigésimo tercero":         ["thirty-third", "33rd"],
+    "cuadragésimo":              ["fortieth", "40th"],
+    "quincuagésimo":             ["fiftieth", "50th"],
+    "sexagésimo":                ["sixtieth", "60th"],
+    "septuagésimo":              ["seventieth", "70th"],
+    "octogésimo":                ["eightieth", "80th"],
+    "nonagésimo":                ["ninetieth", "90th"],
+    "centésimo":                 ["hundredth", "100th"],
+    "centésimo primero":         ["one hundred first", "101st"],
+    "centésimo segundo":         ["one hundred second", "102nd"],
+    "ducentésimo":               ["two hundredth", "200th"],
+    "tricentésimo":              ["three hundredth", "300th"],
+    "cuadringentésimo":          ["four hundredth", "400th"],
+    "quingentésimo":             ["five hundredth", "500th"],
+    "sexcentésimo":              ["six hundredth", "600th"],
+    "septingentésimo":           ["seven hundredth", "700th"],
+    "octingentésimo":            ["eight hundredth", "800th"],
+    "noningentésimo":            ["nine hundredth", "900th"],
+    "milésimo":                  ["thousandth", "1000th"],
+    "milésimo primero":          ["one thousand first", "1001st"],
+    "dosmilésimo":               ["two thousandth", "2000th"],
+    "tresmilésimo":              ["three thousandth", "3000th"],
+    "diezmilésimo":              ["ten thousandth", "10000th"],
+    "cienmilésimo":              ["hundred thousandth", "100000th"],
+    "quinientosmilésimo":        ["five hundred thousandth", "500000th"],
+    "millonésimo":               ["millionth", "1000000th"],
+}
+
 # ── Vocabulary: Lección 4 — El Mundo del Trabajo ─────────────────────────────
 
 VOCABULARY_L4 = {
@@ -763,6 +869,63 @@ L6_COMPOUND_VERBS: dict[str, dict] = {
     },
 }
 
+# ── Flat all-in-one conjugation view ─────────────────────────────────────────
+
+ALL_TENSE_NAMES: dict[str, str] = {
+    "present":                     "Presente",
+    "preterite":                   "Pretérito",
+    "imperfect":                   "Imperfecto",
+    "future":                      "Futuro",
+    "conditional":                 "Condicional",
+    "present_perfect":             "Presente Perfecto de Indicativo",
+    "pluperfect_indicative":       "Pluscuamperfecto de Indicativo",
+    "future_perfect":              "Futuro Perfecto de Indicativo",
+    "conditional_perfect":         "Condicional Perfecto",
+    "present_perfect_subjunctive": "Presente Perfecto del Subjuntivo",
+    "pluperfect_subjunctive":      "Pluscuamperfecto del Subjuntivo",
+}
+
+# Remap conditional pronoun keys to standard 6-pronoun set
+_COND_PRON_MAP = {
+    "yo":                    "yo",
+    "tú":                    "tú",
+    "usted/él/ella":         "él/ella",
+    "nosotros/as":           "nosotros",
+    "ustedes/ellos/ellas":   "ellos/ellas",
+}
+
+ALL_CONJUGATION_VERBS: dict[str, dict] = {}
+
+# Merge VERBS, L4_COMPOUND_VERBS, L6_COMPOUND_VERBS (all share standard PRONOUNS)
+for _src in (VERBS, L4_COMPOUND_VERBS, L6_COMPOUND_VERBS):
+    for _verb, _info in _src.items():
+        if _verb not in ALL_CONJUGATION_VERBS:
+            ALL_CONJUGATION_VERBS[_verb] = dict(_info)
+        else:
+            for _k, _v in _info.items():
+                ALL_CONJUGATION_VERBS[_verb].setdefault(_k, _v)
+
+# Merge CONDITIONAL_VERBS (remap pronouns + derive vosotros as yo_form + "is")
+for _verb, _info in CONDITIONAL_VERBS.items():
+    _cond_src = _info["conditional"]
+    _cond_std: dict[str, str] = {}
+    for _old, _new in _COND_PRON_MAP.items():
+        if _old in _cond_src:
+            _cond_std[_new] = _cond_src[_old]
+    # Derive vosotros: habría → habríais  (yo_form + "is")
+    _cond_std["vosotros"] = _cond_src.get("yo", "") + "is"
+
+    if _verb not in ALL_CONJUGATION_VERBS:
+        ALL_CONJUGATION_VERBS[_verb] = {
+            "english":     _info["english"],
+            "sentence":    _info["sentence"],
+            "conditional": _cond_std,
+        }
+    else:
+        ALL_CONJUGATION_VERBS[_verb]["conditional"] = _cond_std
+        ALL_CONJUGATION_VERBS[_verb].setdefault("english", _info["english"])
+        ALL_CONJUGATION_VERBS[_verb].setdefault("sentence", _info["sentence"])
+
 # ── Lessons ───────────────────────────────────────────────────────────────────
 
 LESSONS = {
@@ -781,6 +944,11 @@ LESSONS = {
             "title": "Lesson 3",
             "subtitle": "Los Medios de Comunicación",
             "words": VOCABULARY_L6,
+        },
+        "4": {
+            "title": "Lesson 4",
+            "subtitle": "Un Sinnúmero de Números",
+            "words": VOCABULARY_NUMBERS,
         },
     },
     "conjugation": {
