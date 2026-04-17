@@ -141,11 +141,9 @@ def index(request: Request, token: str | None = Cookie(default=None)):
         return RedirectResponse("/login", status_code=303)
     vocab_lessons = LESSONS.get("vocabulary", {})
     total_words = sum(len(v.get("words", {})) for v in vocab_lessons.values())
-    numbers_words = vocab_lessons.get("4", {}).get("words", {})
     return templates.TemplateResponse(request, "index.html", {
         "user": user,
         "total_words": total_words,
-        "total_numbers": len(numbers_words),
         "total_verbs": len(ALL_CONJUGATION_VERBS),
         "total_tenses": len(ALL_TENSE_NAMES),
     })

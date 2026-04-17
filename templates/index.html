@@ -54,18 +54,5 @@
     </div>
   </a>
 
-  {% if total_numbers|default(0) > 0 %}
-  <a href="/vocabulary?start=4"
-     class="group bg-white rounded-2xl shadow-sm border border-slate-100 p-8
-            hover:shadow-md hover:border-amber-200 transition-all duration-200 cursor-pointer sm:col-span-2">
-    <div class="text-4xl mb-4">🔢</div>
-    <h2 class="text-xl font-bold text-slate-800 group-hover:text-amber-600 transition">Un Sinnúmero de Números</h2>
-    <p class="text-slate-500 text-sm mt-1">Cardinal and ordinal numbers — Spanish ↔ English</p>
-    <div class="mt-4 text-xs font-semibold text-amber-500 bg-amber-50 inline-block px-3 py-1 rounded-full">
-      {{ total_numbers|default(0) }} words
-    </div>
-  </a>
-  {% endif %}
-
 </div>
 {% endblock %}
