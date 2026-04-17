@@ -41,9 +41,8 @@ def _get_user(token: str | None) -> dict | None:
 
 @app.get("/login", response_class=HTMLResponse)
 def login_page(request: Request, error: str = "", msg: str = ""):
-    return templates.TemplateResponse("login.html",
-                                      {"request": request, "error": error,
-                                       "msg": msg})
+    return templates.TemplateResponse(request, "login.html",
+                                      {"error": error, "msg": msg})
 
 
 @app.post("/login")
@@ -75,9 +74,8 @@ def set_password_page(request: Request, error: str = "",
                       setup_user: str | None = Cookie(default=None)):
     if not setup_user or setup_user not in USERS:
         return RedirectResponse("/login", status_code=303)
-    return templates.TemplateResponse("set_password.html",
-                                      {"request": request, "name": setup_user,
-                                       "error": error})
+    return templates.TemplateResponse(request, "set_password.html",
+                                      {"name": setup_user, "error": error})
 
 
 @app.post("/set-password")
@@ -144,8 +142,8 @@ def index(request: Request, token: str | None = Cookie(default=None)):
     vocab_lessons = LESSONS.get("vocabulary", {})
     total_words = sum(len(v.get("words", {})) for v in vocab_lessons.values())
     numbers_words = vocab_lessons.get("4", {}).get("words", {})
-    return templates.TemplateResponse("index.html", {
-        "request": request, "user": user,
+    return templates.TemplateResponse(request, "index.html", {
+        "user": user,
         "total_words": total_words,
         "total_numbers": len(numbers_words),
         "total_verbs": len(ALL_CONJUGATION_VERBS),
@@ -163,9 +161,8 @@ def vocabulary(request: Request, token: str | None = Cookie(default=None)):
          "count": len(v["words"])}
         for k, v in LESSONS["vocabulary"].items()
     ]
-    return templates.TemplateResponse("vocab.html",
-                                      {"request": request, "lessons": lessons,
-                                       "user": user})
+    return templates.TemplateResponse(request, "vocab.html",
+                                      {"lessons": lessons, "user": user})
 
 
 @app.get("/conjugation", response_class=HTMLResponse)
@@ -173,7 +170,7 @@ def conjugation(request: Request, token: str | None = Cookie(default=None)):
     user = _get_user(token)
     if not user:
         return RedirectResponse("/login", status_code=303)
-    return templates.TemplateResponse("conj.html", {"request": request, "user": user})
+    return templates.TemplateResponse(request, "conj.html", {"user": user})
 
 
 # ── Supervisor ────────────────────────────────────────────────────────────────
@@ -186,9 +183,8 @@ def supervisor_page(request: Request, token: str | None = Cookie(default=None)):
     sessions = get_sessions()
     user_list = [{"name": n, "role": u["role"], "has_pw": has_password(n)}
                  for n, u in USERS.items()]
-    return templates.TemplateResponse("supervisor.html",
-                                      {"request": request, "user": user,
-                                       "sessions": sessions,
+    return templates.TemplateResponse(request, "supervisor.html",
+                                      {"user": user, "sessions": sessions,
                                        "user_list": user_list})
 
 

@@ -11,7 +11,8 @@ import jwt
 
 from users import USERS
 
-SECRET_KEY = os.environ.get("SECRET_KEY", "dev-secret-change-me")
+SECRET_KEY = os.environ.get("SECRET_KEY",
+                            "dev-secret-change-me-min-32-bytes-long-xx")
 PASSWORDS_FILE = Path("passwords.json")
 SESSIONS_FILE = Path("sessions.json")
 
