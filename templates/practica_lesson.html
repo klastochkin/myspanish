@@ -264,7 +264,8 @@
       correct++;
       fetch('/api/event', {method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({type:'good_answer', quiz:'practica',
-          question: q.before + ' ___ ' + q.after})});
+          question: q.before + ' ___ ' + q.after,
+          user_answer: answer})});
     } else {
       wrongItems.push({...q, userAnswer: answer});
       fetch('/api/event', {method:'POST', headers:{'Content-Type':'application/json'},
