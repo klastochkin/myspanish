@@ -15,7 +15,7 @@ from auth import (
     set_password,
     verify_user,
 )
-from data import ALL_CONJUGATION_VERBS, ALL_TENSE_NAMES, LESSONS, PRONOUNS, TENSE_NAMES
+from data import LESSONS
 from users import USERS
 
 app = FastAPI()
@@ -144,8 +144,6 @@ def index(request: Request, token: str | None = Cookie(default=None)):
     return templates.TemplateResponse(request, "index.html", {
         "user": user,
         "total_words": total_words,
-        "total_verbs": len(ALL_CONJUGATION_VERBS),
-        "total_tenses": len(ALL_TENSE_NAMES),
     })
 
 
@@ -161,14 +159,6 @@ def vocabulary(request: Request, token: str | None = Cookie(default=None)):
     ]
     return templates.TemplateResponse(request, "vocab.html",
                                       {"lessons": lessons, "user": user})
-
-
-@app.get("/conjugation", response_class=HTMLResponse)
-def conjugation(request: Request, token: str | None = Cookie(default=None)):
-    user = _get_user(token)
-    if not user:
-        return RedirectResponse("/login", status_code=303)
-    return templates.TemplateResponse(request, "conj.html", {"user": user})
 
 
 # ── Supervisor ────────────────────────────────────────────────────────────────
@@ -230,30 +220,6 @@ def api_vocab(lesson_id: str, token: str | None = Cookie(default=None)):
         raise HTTPException(404)
     return {"title": lesson["title"], "subtitle": lesson["subtitle"],
             "words": lesson["words"]}
-
-
-@app.get("/api/conjugation/all")
-def api_conj_all(token: str | None = Cookie(default=None)):
-    if not _get_user(token):
-        raise HTTPException(403)
-    return {
-        "verbs":       ALL_CONJUGATION_VERBS,
-        "tense_names": ALL_TENSE_NAMES,
-        "pronouns":    PRONOUNS,
-    }
-
-
-@app.get("/api/conjugation/{lesson_id}")
-def api_conj(lesson_id: str, token: str | None = Cookie(default=None)):
-    if not _get_user(token):
-        raise HTTPException(403)
-    lesson = LESSONS["conjugation"].get(lesson_id)
-    if not lesson:
-        raise HTTPException(404)
-    return {"title": lesson["title"], "subtitle": lesson["subtitle"],
-            "verbs": lesson["verbs"],
-            "tense_names": lesson.get("tense_names", TENSE_NAMES),
-            "pronouns": lesson.get("pronouns", PRONOUNS)}
 
 
 # ── Event recording API ──────────────────────────────────────────────────────
