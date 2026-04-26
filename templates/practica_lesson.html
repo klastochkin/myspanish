@@ -1,0 +1,346 @@
+{% extends "base.html" %}
+{% block title %}Práctica{% endblock %}
+{% block nav_title %}Práctica{% endblock %}
+
+{% block content %}
+
+<!-- ── Screen: Loading ─────────────────────────────────────────────────────── -->
+<div id="screen-loading" class="fade-up text-center py-16 text-slate-400">
+  Loading…
+</div>
+
+<!-- ── Screen: Intro ──────────────────────────────────────────────────────── -->
+<div id="screen-intro" class="hidden fade-up">
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 mb-5">
+    <p class="text-xs font-bold uppercase tracking-widest text-emerald-500 mb-3">Explicación</p>
+    <h2 id="intro-title" class="text-xl font-extrabold text-slate-800 mb-1"></h2>
+    <p id="intro-subtitle" class="text-slate-500 text-sm mb-6"></p>
+    <div id="intro-body" class="space-y-5 text-slate-700 text-sm leading-relaxed"></div>
+  </div>
+  <button onclick="startQuiz()"
+          class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold
+                 py-3 rounded-xl transition">
+    Continuar →
+  </button>
+</div>
+
+<!-- ── Screen: Quiz ───────────────────────────────────────────────────────── -->
+<div id="screen-quiz" class="hidden fade-up">
+
+  <div class="flex items-center justify-between mb-3 text-sm text-slate-500 font-medium">
+    <span id="q-counter">1 / –</span>
+    <span>
+      <span class="text-emerald-600 font-semibold" id="score-correct">✓ 0</span>
+      <span class="mx-1 text-slate-300">·</span>
+      <span class="text-rose-500 font-semibold" id="score-wrong">✗ 0</span>
+    </span>
+  </div>
+
+  <div class="w-full bg-slate-100 rounded-full h-2 mb-6">
+    <div id="progress-bar" class="progress-bar bg-emerald-500 h-2 rounded-full" style="width:0%"></div>
+  </div>
+
+  <!-- Card -->
+  <div id="quiz-card" class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+
+    <!-- Question -->
+    <div id="q-phase">
+      <p class="text-xs font-bold uppercase tracking-widest text-emerald-500 mb-4">
+        Escribe la forma correcta del verbo
+      </p>
+
+      <!-- Sentence with inline blank -->
+      <div id="q-sentence"
+           class="text-lg text-slate-700 leading-relaxed mb-6 flex flex-wrap items-baseline gap-1">
+      </div>
+
+      <p class="text-slate-400 text-xs mb-2">Accents optional</p>
+      <input id="answer-input" type="text" autocomplete="off" autocorrect="off" spellcheck="false"
+             placeholder="your answer…"
+             class="w-full border border-slate-200 rounded-xl px-4 py-3 text-lg
+                    focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400 transition mb-5"
+             onkeydown="if(event.key==='Enter') submitAnswer()" />
+      <div class="flex gap-3">
+        <button onclick="submitAnswer()"
+                class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold
+                       py-3 rounded-xl transition">Check</button>
+        <button onclick="skipQuestion()"
+                class="px-5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold
+                       py-3 rounded-xl transition">Skip</button>
+      </div>
+    </div>
+
+    <!-- Feedback -->
+    <div id="fb-phase" class="hidden">
+      <div id="fb-badge" class="text-lg font-bold mb-3"></div>
+      <div id="fb-correct-label" class="text-slate-500 text-sm mb-1"></div>
+      <div id="fb-answer" class="text-2xl font-bold text-slate-800 mb-4"></div>
+      <!-- Full sentence with answer filled in -->
+      <div id="fb-sentence" class="text-sm text-slate-500 italic mb-8"></div>
+      <button onclick="nextQuestion()"
+              class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold
+                     py-3 rounded-xl transition">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Screen: Results ────────────────────────────────────────────────────── -->
+<div id="screen-results" class="hidden fade-up">
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 text-center">
+    <div class="text-5xl mb-4" id="result-emoji">🎉</div>
+    <h2 class="text-2xl font-extrabold text-slate-800 mb-1">¡Listo!</h2>
+    <p id="result-score" class="text-slate-500 mb-4"></p>
+    <div class="w-full bg-slate-100 rounded-full h-3 mb-8">
+      <div id="result-bar" class="progress-bar h-3 rounded-full bg-emerald-500" style="width:0%"></div>
+    </div>
+
+    <div id="wrong-section" class="text-left mb-6 hidden">
+      <h3 class="text-sm font-bold uppercase tracking-wide text-slate-400 mb-3">Review</h3>
+      <div id="wrong-list" class="space-y-3 max-h-80 overflow-y-auto pr-1"></div>
+    </div>
+
+    <div class="flex flex-col gap-3">
+      <button id="btn-practice-wrong" onclick="practiceWrong()"
+              class="hidden w-full bg-rose-50 hover:bg-rose-100 text-rose-600 font-semibold
+                     py-3 rounded-xl transition">Practice Wrong Answers</button>
+      <button onclick="restartLesson()"
+              class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold
+                     py-3 rounded-xl transition">Try Again</button>
+      <a href="/practica"
+         class="w-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold
+                py-3 rounded-xl transition text-center block">Back to Lessons</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block head %}
+<script>
+  const LESSON_ID = "{{ lesson_id }}";
+
+  let lessonData  = null;
+  let questions   = [];   // working copy
+  let allQuestions = [];  // original order for restart
+  let currentIdx  = 0;
+  let correct     = 0;
+  let wrongItems  = [];
+
+  // ── Utilities ──────────────────────────────────────────────────────────────
+  function norm(s) {
+    return s.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+  function checkAns(user, ex) {
+    const n = norm(user);
+    if (n === norm(ex.answer)) return true;
+    return (ex.alts || []).some(a => n === norm(a));
+  }
+  function show(id) { document.getElementById(id).classList.remove('hidden'); }
+  function hide(id) { document.getElementById(id).classList.add('hidden'); }
+  function setText(id, t) { document.getElementById(id).textContent = t; }
+  function setHTML(id, h) { document.getElementById(id).innerHTML = h; }
+
+  function showScreen(name) {
+    ['screen-loading','screen-intro','screen-quiz','screen-results'].forEach(s => hide(s));
+    show('screen-' + name);
+  }
+
+  // ── Load lesson ────────────────────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    fetch(`/api/practica/${LESSON_ID}`)
+      .then(r => r.json())
+      .then(data => {
+        lessonData = data;
+        allQuestions = data.exercises.map((ex, i) => ({...ex, _idx: i}));
+        questions = [...allQuestions];
+        if (data.intro) {
+          renderIntro(data);
+          showScreen('intro');
+        } else {
+          startQuiz();
+        }
+      });
+  });
+
+  // ── Intro screen ───────────────────────────────────────────────────────────
+  function renderIntro(data) {
+    setText('intro-title', data.title);
+    setText('intro-subtitle', data.subtitle);
+
+    const body = document.getElementById('intro-body');
+    body.innerHTML = data.intro.map(block => {
+      if (block.type === 'rule') {
+        let html = `<p class="text-slate-700">${block.text}</p>`;
+        if (block.examples) {
+          html += `<ul class="mt-2 space-y-1 pl-4 border-l-2 border-emerald-200">` +
+            block.examples.map(e => `<li class="italic text-slate-600">${e}</li>`).join('') +
+            `</ul>`;
+        }
+        return `<div>${html}</div>`;
+      }
+      if (block.type === 'examples') {
+        return `<div>
+          <p class="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-2">Ejemplos</p>
+          <ul class="space-y-1 pl-4 border-l-2 border-emerald-200">
+            ${block.items.map(e => `<li class="italic text-slate-600">${e}</li>`).join('')}
+          </ul>
+        </div>`;
+      }
+      if (block.type === 'note') {
+        let html = `<div class="bg-amber-50 border border-amber-100 rounded-xl px-4 py-3">
+          <p class="font-semibold text-amber-700 mb-1">${block.marker} ${block.text}</p>`;
+        if (block.examples) {
+          html += `<ul class="mt-1 space-y-0.5 pl-3">` +
+            block.examples.map(e => `<li class="text-slate-600 text-xs italic">${e}</li>`).join('') +
+            `</ul>`;
+        }
+        html += `</div>`;
+        return html;
+      }
+      return '';
+    }).join('');
+  }
+
+  // ── Quiz ───────────────────────────────────────────────────────────────────
+  function startQuiz() {
+    currentIdx = 0; correct = 0; wrongItems = [];
+    showScreen('quiz');
+    renderQuestion();
+  }
+
+  function restartLesson() {
+    questions = [...allQuestions];
+    if (lessonData.intro) {
+      renderIntro(lessonData);
+      showScreen('intro');
+    } else {
+      startQuiz();
+    }
+  }
+
+  function practiceWrong() {
+    questions = wrongItems.map(w => ({...w}));
+    startQuiz();
+  }
+
+  // ── Render ─────────────────────────────────────────────────────────────────
+  function renderQuestion() {
+    const total = questions.length;
+    setText('q-counter', `${currentIdx + 1} / ${total}`);
+    document.getElementById('progress-bar').style.width = `${(currentIdx / total) * 100}%`;
+    setText('score-correct', `✓ ${correct}`);
+    setText('score-wrong', `✗ ${wrongItems.length}`);
+
+    const q = questions[currentIdx];
+
+    // Build inline sentence: "before [hint] after"
+    const sentEl = document.getElementById('q-sentence');
+    sentEl.innerHTML =
+      `<span>${q.before}</span>` +
+      `<span class="inline-flex items-center gap-1 mx-1">` +
+        `<span class="border-b-2 border-emerald-400 px-2 text-emerald-400 font-semibold min-w-[3rem] text-center">___</span>` +
+        `<span class="text-xs text-slate-400 font-normal">(${q.hint})</span>` +
+      `</span>` +
+      `<span>${q.after}</span>`;
+
+    const card = document.getElementById('quiz-card');
+    card.className = 'bg-white rounded-2xl shadow-sm border border-slate-100 p-8 pop';
+    show('q-phase'); hide('fb-phase');
+    const input = document.getElementById('answer-input');
+    input.value = ''; input.disabled = false;
+    setTimeout(() => input.focus(), 50);
+  }
+
+  // ── Submit / Skip ──────────────────────────────────────────────────────────
+  function submitAnswer() {
+    const input = document.getElementById('answer-input');
+    const answer = input.value.trim();
+    if (!answer) return;
+    input.disabled = true;
+
+    const q = questions[currentIdx];
+    const ok = checkAns(answer, q);
+    if (ok) {
+      correct++;
+      fetch('/api/event', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({type:'good_answer', quiz:'practica',
+          question: q.before + ' ___ ' + q.after})});
+    } else {
+      wrongItems.push({...q, userAnswer: answer});
+      fetch('/api/event', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({type:'bad_answer', quiz:'practica',
+          question: q.before + ' ___ ' + q.after,
+          user_answer: answer, correct_answer: q.answer})});
+    }
+    showFeedback(ok, q, answer);
+  }
+
+  function skipQuestion() {
+    const q = questions[currentIdx];
+    showFeedback(null, q, '');
+  }
+
+  // ── Feedback ───────────────────────────────────────────────────────────────
+  function showFeedback(ok, q, userAnswer) {
+    hide('q-phase'); show('fb-phase');
+    const card  = document.getElementById('quiz-card');
+    const badge = document.getElementById('fb-badge');
+    const label = document.getElementById('fb-correct-label');
+
+    if (ok === null) {
+      card.className = 'bg-white rounded-2xl shadow-sm border-2 border-slate-200 p-8';
+      badge.textContent = '⏭ Skipped';
+      badge.className = 'text-lg font-bold mb-3 text-slate-500';
+      label.textContent = 'Correct answer:';
+    } else if (ok) {
+      card.className = 'bg-white rounded-2xl shadow-sm border-2 border-emerald-400 p-8';
+      badge.textContent = '✓ Correct!';
+      badge.className = 'text-lg font-bold mb-3 text-emerald-600';
+      label.textContent = '';
+    } else {
+      card.className = 'bg-white rounded-2xl shadow-sm border-2 border-rose-400 p-8 shake';
+      badge.textContent = '✗ Wrong';
+      badge.className = 'text-lg font-bold mb-3 text-rose-500';
+      label.textContent = 'Correct answer:';
+    }
+
+    setText('fb-answer', q.answer);
+
+    // Full sentence with correct answer highlighted
+    setHTML('fb-sentence',
+      q.before +
+      ' <strong class="text-emerald-700">' + q.answer + '</strong> ' +
+      q.after);
+  }
+
+  function nextQuestion() {
+    currentIdx++;
+    if (currentIdx >= questions.length) showResults();
+    else renderQuestion();
+  }
+
+  // ── Results ────────────────────────────────────────────────────────────────
+  function showResults() {
+    showScreen('results');
+    const total = questions.length;
+    const pct   = total ? Math.round((correct / total) * 100) : 0;
+
+    setText('result-emoji', pct === 100 ? '🏆' : pct >= 80 ? '🎉' : pct >= 50 ? '📖' : '💪');
+    setText('result-score', `${correct} / ${total} correct (${pct}%)`);
+    setTimeout(() => { document.getElementById('result-bar').style.width = `${pct}%`; }, 100);
+
+    if (wrongItems.length > 0) {
+      show('wrong-section');
+      show('btn-practice-wrong');
+      setHTML('wrong-list', wrongItems.map(w => `
+        <div class="bg-slate-50 rounded-xl px-4 py-3 text-sm">
+          <div class="text-slate-500 italic mb-1">${w.before} <span class="text-rose-400 line-through">${w.userAnswer || '—'}</span> ${w.after}</div>
+          <div class="text-slate-700">${w.before} <strong class="text-emerald-700">${w.answer}</strong> ${w.after}</div>
+        </div>`).join(''));
+    } else {
+      hide('wrong-section');
+      hide('btn-practice-wrong');
+    }
+  }
+</script>
+{% endblock %}

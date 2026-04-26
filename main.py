@@ -21,14 +21,12 @@ from users import USERS
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
-# Optional env-var for emergency password resets (see /reset-password endpoint)
 RESET_KEY = os.environ.get("RESET_KEY", "")
 
 
 # ── Auth helpers ──────────────────────────────────────────────────────────────
 
 def _get_user(token: str | None) -> dict | None:
-    """Decode JWT and return {"name": ..., "role": ...} or None."""
     if not token:
         return None
     payload = decode_token(token)
@@ -47,25 +45,18 @@ def login_page(request: Request, error: str = "", msg: str = ""):
 
 @app.post("/login")
 def login(name: str = Form(...), password: str = Form(...)):
-    # Unknown user?
     if name not in USERS:
         return RedirectResponse("/login?error=Invalid+name+or+password",
                                 status_code=303)
-
-    # No password yet → redirect to set-password page
     if not has_password(name):
         response = RedirectResponse("/set-password", status_code=303)
-        # Stash the name in a short-lived cookie so the set-password page knows who
         response.set_cookie("setup_user", name, max_age=300,
                             httponly=True, samesite="lax")
         return response
-
-    # Normal verification
     user_info = verify_user(name, password)
     if not user_info:
         return RedirectResponse("/login?error=Invalid+name+or+password",
                                 status_code=303)
-
     return _issue_login(name, user_info["role"])
 
 
@@ -83,14 +74,12 @@ def do_set_password(password: str = Form(...), confirm: str = Form(...),
                     setup_user: str | None = Cookie(default=None)):
     if not setup_user or setup_user not in USERS:
         return RedirectResponse("/login", status_code=303)
-
     if len(password) < 3:
         return RedirectResponse("/set-password?error=Password+must+be+at+least+3+characters",
                                 status_code=303)
     if password != confirm:
         return RedirectResponse("/set-password?error=Passwords+do+not+match",
                                 status_code=303)
-
     set_password(setup_user, password)
     role = USERS[setup_user]["role"]
     response = _issue_login(setup_user, role)
@@ -99,7 +88,6 @@ def do_set_password(password: str = Form(...), confirm: str = Form(...),
 
 
 def _issue_login(name: str, role: str) -> RedirectResponse:
-    """Create JWT, set cookie, record login event, redirect."""
     days = 7 if role == "user" else 1
     token = create_token(name, role, days)
     dest = "/supervisor" if role == "supervisor" else "/"
@@ -117,11 +105,10 @@ def logout():
     return response
 
 
-# ── Emergency reset via env-var key ──────────────────────────────────────────
+# ── Emergency reset ───────────────────────────────────────────────────────────
 
 @app.get("/reset-password")
 def reset_password_via_key(key: str = "", user: str = ""):
-    """GET /reset-password?key=RESET_KEY&user=F  — clears password for user."""
     if not RESET_KEY or key != RESET_KEY:
         raise HTTPException(403, "Forbidden. Set RESET_KEY env var and pass ?key=...")
     if user not in USERS:
@@ -141,9 +128,11 @@ def index(request: Request, token: str | None = Cookie(default=None)):
         return RedirectResponse("/login", status_code=303)
     vocab_lessons = LESSONS.get("vocabulary", {})
     total_words = sum(len(v.get("words", {})) for v in vocab_lessons.values())
+    practica_lessons = LESSONS.get("practica", {})
     return templates.TemplateResponse(request, "index.html", {
         "user": user,
         "total_words": total_words,
+        "total_practica": len(practica_lessons),
     })
 
 
@@ -159,6 +148,32 @@ def vocabulary(request: Request, token: str | None = Cookie(default=None)):
     ]
     return templates.TemplateResponse(request, "vocab.html",
                                       {"lessons": lessons, "user": user})
+
+
+@app.get("/practica", response_class=HTMLResponse)
+def practica(request: Request, token: str | None = Cookie(default=None)):
+    user = _get_user(token)
+    if not user:
+        return RedirectResponse("/login", status_code=303)
+    lessons = [
+        {"id": k, "title": v["title"], "subtitle": v["subtitle"],
+         "count": len(v["exercises"]), "has_intro": v["intro"] is not None}
+        for k, v in LESSONS["practica"].items()
+    ]
+    return templates.TemplateResponse(request, "practica.html",
+                                      {"lessons": lessons, "user": user})
+
+
+@app.get("/practica/{lesson_id}", response_class=HTMLResponse)
+def practica_lesson(lesson_id: str, request: Request,
+                    token: str | None = Cookie(default=None)):
+    user = _get_user(token)
+    if not user:
+        return RedirectResponse("/login", status_code=303)
+    if lesson_id not in LESSONS["practica"]:
+        raise HTTPException(404)
+    return templates.TemplateResponse(request, "practica_lesson.html",
+                                      {"lesson_id": lesson_id, "user": user})
 
 
 # ── Supervisor ────────────────────────────────────────────────────────────────
@@ -199,7 +214,6 @@ def delete_all_sessions(token: str | None = Cookie(default=None)):
 @app.post("/api/reset-password/{target_user}")
 def reset_user_password(target_user: str,
                         token: str | None = Cookie(default=None)):
-    """Supervisor resets a user's password (forces re-set on next login)."""
     user = _get_user(token)
     if not user or user["role"] != "supervisor":
         raise HTTPException(403)
@@ -209,7 +223,7 @@ def reset_user_password(target_user: str,
     return {"ok": True, "user": target_user}
 
 
-# ── Quiz API ──────────────────────────────────────────────────────────────────
+# ── Quiz APIs ─────────────────────────────────────────────────────────────────
 
 @app.get("/api/vocabulary/{lesson_id}")
 def api_vocab(lesson_id: str, token: str | None = Cookie(default=None)):
@@ -222,7 +236,22 @@ def api_vocab(lesson_id: str, token: str | None = Cookie(default=None)):
             "words": lesson["words"]}
 
 
-# ── Event recording API ──────────────────────────────────────────────────────
+@app.get("/api/practica/{lesson_id}")
+def api_practica(lesson_id: str, token: str | None = Cookie(default=None)):
+    if not _get_user(token):
+        raise HTTPException(403)
+    lesson = LESSONS["practica"].get(lesson_id)
+    if not lesson:
+        raise HTTPException(404)
+    return {
+        "title":     lesson["title"],
+        "subtitle":  lesson["subtitle"],
+        "intro":     lesson["intro"],
+        "exercises": lesson["exercises"],
+    }
+
+
+# ── Event recording API ───────────────────────────────────────────────────────
 
 @app.post("/api/event")
 async def record_quiz_event(request: Request,

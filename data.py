@@ -1,14 +1,4 @@
-PRONOUNS = ["yo", "tú", "él/ella", "nosotros", "vosotros", "ellos/ellas"]
-
-TENSE_NAMES = {
-    "present":               "Presente",
-    "preterite":             "Pretérito",
-    "imperfect":             "Imperfecto",
-    "future":                "Futuro",
-    "pluperfect_subjunctive": "Pluscuamperfecto de Subjuntivo",
-}
-
-# ── Vocabulary ────────────────────────────────────────────────────────────────
+# ── Vocabulary: Lección 5 — Un Festival de Arte ───────────────────────────────
 
 VOCABULARY = {
     "el baile": ["dance"], "la danza": ["dance"], "el boleto": ["ticket"],
@@ -64,353 +54,9 @@ VOCABULARY = {
     "componer": ["to compose"], "tejer": ["to knit", "to weave"],
 }
 
-# ── Conjugation verbs ─────────────────────────────────────────────────────────
-
-# fmt: off
-VERBS: dict[str, dict] = {
-    "bailar": {
-        "english": "to dance", "sentence": "{bailar} en la fiesta del colegio.",
-        "present":                {"yo": "bailo",                    "tú": "bailas",                    "él/ella": "baila",                    "nosotros": "bailamos",                    "vosotros": "bailáis",                    "ellos/ellas": "bailan"},
-        "preterite":              {"yo": "bailé",                    "tú": "bailaste",                  "él/ella": "bailó",                    "nosotros": "bailamos",                    "vosotros": "bailasteis",                 "ellos/ellas": "bailaron"},
-        "imperfect":              {"yo": "bailaba",                  "tú": "bailabas",                  "él/ella": "bailaba",                  "nosotros": "bailábamos",                  "vosotros": "bailabais",                  "ellos/ellas": "bailaban"},
-        "future":                 {"yo": "bailaré",                  "tú": "bailarás",                  "él/ella": "bailará",                  "nosotros": "bailaremos",                  "vosotros": "bailaréis",                  "ellos/ellas": "bailarán"},
-        "pluperfect_subjunctive": {"yo": "hubiera bailado",          "tú": "hubieras bailado",          "él/ella": "hubiera bailado",          "nosotros": "hubiéramos bailado",          "vosotros": "hubierais bailado",          "ellos/ellas": "hubieran bailado"},
-    },
-    "cantar": {
-        "english": "to sing", "sentence": "{cantar} una canción en el concierto.",
-        "present":                {"yo": "canto",                    "tú": "cantas",                    "él/ella": "canta",                    "nosotros": "cantamos",                    "vosotros": "cantáis",                    "ellos/ellas": "cantan"},
-        "preterite":              {"yo": "canté",                    "tú": "cantaste",                  "él/ella": "cantó",                    "nosotros": "cantamos",                    "vosotros": "cantasteis",                 "ellos/ellas": "cantaron"},
-        "imperfect":              {"yo": "cantaba",                  "tú": "cantabas",                  "él/ella": "cantaba",                  "nosotros": "cantábamos",                  "vosotros": "cantabais",                  "ellos/ellas": "cantaban"},
-        "future":                 {"yo": "cantaré",                  "tú": "cantarás",                  "él/ella": "cantará",                  "nosotros": "cantaremos",                  "vosotros": "cantaréis",                  "ellos/ellas": "cantarán"},
-        "pluperfect_subjunctive": {"yo": "hubiera cantado",          "tú": "hubieras cantado",          "él/ella": "hubiera cantado",          "nosotros": "hubiéramos cantado",          "vosotros": "hubierais cantado",          "ellos/ellas": "hubieran cantado"},
-    },
-    "dibujar": {
-        "english": "to draw", "sentence": "{dibujar} un retrato en la clase de arte.",
-        "present":                {"yo": "dibujo",                   "tú": "dibujas",                   "él/ella": "dibuja",                   "nosotros": "dibujamos",                   "vosotros": "dibujáis",                   "ellos/ellas": "dibujan"},
-        "preterite":              {"yo": "dibujé",                   "tú": "dibujaste",                 "él/ella": "dibujó",                   "nosotros": "dibujamos",                   "vosotros": "dibujasteis",                "ellos/ellas": "dibujaron"},
-        "imperfect":              {"yo": "dibujaba",                 "tú": "dibujabas",                 "él/ella": "dibujaba",                 "nosotros": "dibujábamos",                 "vosotros": "dibujabais",                 "ellos/ellas": "dibujaban"},
-        "future":                 {"yo": "dibujaré",                 "tú": "dibujarás",                 "él/ella": "dibujará",                 "nosotros": "dibujaremos",                 "vosotros": "dibujaréis",                 "ellos/ellas": "dibujarán"},
-        "pluperfect_subjunctive": {"yo": "hubiera dibujado",         "tú": "hubieras dibujado",         "él/ella": "hubiera dibujado",         "nosotros": "hubiéramos dibujado",         "vosotros": "hubierais dibujado",         "ellos/ellas": "hubieran dibujado"},
-    },
-    "pintar": {
-        "english": "to paint", "sentence": "{pintar} un cuadro hermoso en el estudio.",
-        "present":                {"yo": "pinto",                    "tú": "pintas",                    "él/ella": "pinta",                    "nosotros": "pintamos",                    "vosotros": "pintáis",                    "ellos/ellas": "pintan"},
-        "preterite":              {"yo": "pinté",                    "tú": "pintaste",                  "él/ella": "pintó",                    "nosotros": "pintamos",                    "vosotros": "pintasteis",                 "ellos/ellas": "pintaron"},
-        "imperfect":              {"yo": "pintaba",                  "tú": "pintabas",                  "él/ella": "pintaba",                  "nosotros": "pintábamos",                  "vosotros": "pintabais",                  "ellos/ellas": "pintaban"},
-        "future":                 {"yo": "pintaré",                  "tú": "pintarás",                  "él/ella": "pintará",                  "nosotros": "pintaremos",                  "vosotros": "pintaréis",                  "ellos/ellas": "pintarán"},
-        "pluperfect_subjunctive": {"yo": "hubiera pintado",          "tú": "hubieras pintado",          "él/ella": "hubiera pintado",          "nosotros": "hubiéramos pintado",          "vosotros": "hubierais pintado",          "ellos/ellas": "hubieran pintado"},
-    },
-    "presentar": {
-        "english": "to present", "sentence": "{presentar} el espectáculo en el teatro.",
-        "present":                {"yo": "presento",                 "tú": "presentas",                 "él/ella": "presenta",                 "nosotros": "presentamos",                 "vosotros": "presentáis",                 "ellos/ellas": "presentan"},
-        "preterite":              {"yo": "presenté",                 "tú": "presentaste",               "él/ella": "presentó",                 "nosotros": "presentamos",                 "vosotros": "presentasteis",              "ellos/ellas": "presentaron"},
-        "imperfect":              {"yo": "presentaba",               "tú": "presentabas",               "él/ella": "presentaba",               "nosotros": "presentábamos",               "vosotros": "presentabais",               "ellos/ellas": "presentaban"},
-        "future":                 {"yo": "presentaré",               "tú": "presentarás",               "él/ella": "presentará",               "nosotros": "presentaremos",               "vosotros": "presentaréis",               "ellos/ellas": "presentarán"},
-        "pluperfect_subjunctive": {"yo": "hubiera presentado",       "tú": "hubieras presentado",       "él/ella": "hubiera presentado",       "nosotros": "hubiéramos presentado",       "vosotros": "hubierais presentado",       "ellos/ellas": "hubieran presentado"},
-    },
-    "apreciar": {
-        "english": "to appreciate", "sentence": "{apreciar} la música clásica de la orquesta.",
-        "present":                {"yo": "aprecio",                  "tú": "aprecias",                  "él/ella": "aprecia",                  "nosotros": "apreciamos",                  "vosotros": "apreciáis",                  "ellos/ellas": "aprecian"},
-        "preterite":              {"yo": "aprecié",                  "tú": "apreciaste",                "él/ella": "apreció",                  "nosotros": "apreciamos",                  "vosotros": "apreciasteis",               "ellos/ellas": "apreciaron"},
-        "imperfect":              {"yo": "apreciaba",                "tú": "apreciabas",                "él/ella": "apreciaba",                "nosotros": "apreciábamos",                "vosotros": "apreciabais",                "ellos/ellas": "apreciaban"},
-        "future":                 {"yo": "apreciaré",                "tú": "apreciarás",                "él/ella": "apreciará",                "nosotros": "apreciaremos",                "vosotros": "apreciaréis",                "ellos/ellas": "apreciarán"},
-        "pluperfect_subjunctive": {"yo": "hubiera apreciado",        "tú": "hubieras apreciado",        "él/ella": "hubiera apreciado",        "nosotros": "hubiéramos apreciado",        "vosotros": "hubierais apreciado",        "ellos/ellas": "hubieran apreciado"},
-    },
-    "declamar": {
-        "english": "to recite / declaim", "sentence": "{declamar} un poema en el festival de arte.",
-        "present":                {"yo": "declamo",                  "tú": "declamas",                  "él/ella": "declama",                  "nosotros": "declamamos",                  "vosotros": "declamáis",                  "ellos/ellas": "declaman"},
-        "preterite":              {"yo": "declamé",                  "tú": "declamaste",                "él/ella": "declamó",                  "nosotros": "declamamos",                  "vosotros": "declamasteis",               "ellos/ellas": "declamaron"},
-        "imperfect":              {"yo": "declamaba",                "tú": "declamabas",                "él/ella": "declamaba",                "nosotros": "declamábamos",                "vosotros": "declamabais",                "ellos/ellas": "declamaban"},
-        "future":                 {"yo": "declamaré",                "tú": "declamarás",                "él/ella": "declamará",                "nosotros": "declamaremos",                "vosotros": "declamaréis",                "ellos/ellas": "declamarán"},
-        "pluperfect_subjunctive": {"yo": "hubiera declamado",        "tú": "hubieras declamado",        "él/ella": "hubiera declamado",        "nosotros": "hubiéramos declamado",        "vosotros": "hubierais declamado",        "ellos/ellas": "hubieran declamado"},
-    },
-    "interpretar": {
-        "english": "to perform / interpret", "sentence": "{interpretar} el papel del protagonista en la obra.",
-        "present":                {"yo": "interpreto",               "tú": "interpretas",               "él/ella": "interpreta",               "nosotros": "interpretamos",               "vosotros": "interpretáis",               "ellos/ellas": "interpretan"},
-        "preterite":              {"yo": "interpreté",               "tú": "interpretaste",             "él/ella": "interpretó",               "nosotros": "interpretamos",               "vosotros": "interpretasteis",            "ellos/ellas": "interpretaron"},
-        "imperfect":              {"yo": "interpretaba",             "tú": "interpretabas",             "él/ella": "interpretaba",             "nosotros": "interpretábamos",             "vosotros": "interpretabais",             "ellos/ellas": "interpretaban"},
-        "future":                 {"yo": "interpretaré",             "tú": "interpretarás",             "él/ella": "interpretará",             "nosotros": "interpretaremos",             "vosotros": "interpretaréis",             "ellos/ellas": "interpretarán"},
-        "pluperfect_subjunctive": {"yo": "hubiera interpretado",     "tú": "hubieras interpretado",     "él/ella": "hubiera interpretado",     "nosotros": "hubiéramos interpretado",     "vosotros": "hubierais interpretado",     "ellos/ellas": "hubieran interpretado"},
-    },
-    "tocar": {
-        "english": "to play (instrument)", "sentence": "{tocar} la guitarra en la orquesta.",
-        "present":                {"yo": "toco",                     "tú": "tocas",                     "él/ella": "toca",                     "nosotros": "tocamos",                     "vosotros": "tocáis",                     "ellos/ellas": "tocan"},
-        "preterite":              {"yo": "toqué",                    "tú": "tocaste",                   "él/ella": "tocó",                     "nosotros": "tocamos",                     "vosotros": "tocasteis",                  "ellos/ellas": "tocaron"},
-        "imperfect":              {"yo": "tocaba",                   "tú": "tocabas",                   "él/ella": "tocaba",                   "nosotros": "tocábamos",                   "vosotros": "tocabais",                   "ellos/ellas": "tocaban"},
-        "future":                 {"yo": "tocaré",                   "tú": "tocarás",                   "él/ella": "tocará",                   "nosotros": "tocaremos",                   "vosotros": "tocaréis",                   "ellos/ellas": "tocarán"},
-        "pluperfect_subjunctive": {"yo": "hubiera tocado",           "tú": "hubieras tocado",           "él/ella": "hubiera tocado",           "nosotros": "hubiéramos tocado",           "vosotros": "hubierais tocado",           "ellos/ellas": "hubieran tocado"},
-    },
-    "criticar": {
-        "english": "to criticize", "sentence": "{criticar} la obra maestra expuesta en el museo.",
-        "present":                {"yo": "critico",                  "tú": "criticas",                  "él/ella": "critica",                  "nosotros": "criticamos",                  "vosotros": "criticáis",                  "ellos/ellas": "critican"},
-        "preterite":              {"yo": "critiqué",                 "tú": "criticaste",                "él/ella": "criticó",                  "nosotros": "criticamos",                  "vosotros": "criticasteis",               "ellos/ellas": "criticaron"},
-        "imperfect":              {"yo": "criticaba",                "tú": "criticabas",                "él/ella": "criticaba",                "nosotros": "criticábamos",                "vosotros": "criticabais",                "ellos/ellas": "criticaban"},
-        "future":                 {"yo": "criticaré",                "tú": "criticarás",                "él/ella": "criticará",                "nosotros": "criticaremos",                "vosotros": "criticaréis",                "ellos/ellas": "criticarán"},
-        "pluperfect_subjunctive": {"yo": "hubiera criticado",        "tú": "hubieras criticado",        "él/ella": "hubiera criticado",        "nosotros": "hubiéramos criticado",        "vosotros": "hubierais criticado",        "ellos/ellas": "hubieran criticado"},
-    },
-    "publicar": {
-        "english": "to publish", "sentence": "{publicar} un libro de poesía este año.",
-        "present":                {"yo": "publico",                  "tú": "publicas",                  "él/ella": "publica",                  "nosotros": "publicamos",                  "vosotros": "publicáis",                  "ellos/ellas": "publican"},
-        "preterite":              {"yo": "publiqué",                 "tú": "publicaste",                "él/ella": "publicó",                  "nosotros": "publicamos",                  "vosotros": "publicasteis",               "ellos/ellas": "publicaron"},
-        "imperfect":              {"yo": "publicaba",                "tú": "publicabas",                "él/ella": "publicaba",                "nosotros": "publicábamos",                "vosotros": "publicabais",                "ellos/ellas": "publicaban"},
-        "future":                 {"yo": "publicaré",                "tú": "publicarás",                "él/ella": "publicará",                "nosotros": "publicaremos",                "vosotros": "publicaréis",                "ellos/ellas": "publicarán"},
-        "pluperfect_subjunctive": {"yo": "hubiera publicado",        "tú": "hubieras publicado",        "él/ella": "hubiera publicado",        "nosotros": "hubiéramos publicado",        "vosotros": "hubierais publicado",        "ellos/ellas": "hubieran publicado"},
-    },
-    "dramatizar": {
-        "english": "to dramatize", "sentence": "{dramatizar} la historia en el escenario.",
-        "present":                {"yo": "dramatizo",                "tú": "dramatizas",                "él/ella": "dramatiza",                "nosotros": "dramatizamos",                "vosotros": "dramatizáis",                "ellos/ellas": "dramatizan"},
-        "preterite":              {"yo": "dramaticé",                "tú": "dramatizaste",              "él/ella": "dramatizó",                "nosotros": "dramatizamos",                "vosotros": "dramatizasteis",             "ellos/ellas": "dramatizaron"},
-        "imperfect":              {"yo": "dramatizaba",              "tú": "dramatizabas",              "él/ella": "dramatizaba",              "nosotros": "dramatizábamos",              "vosotros": "dramatizabais",              "ellos/ellas": "dramatizaban"},
-        "future":                 {"yo": "dramatizaré",              "tú": "dramatizarás",              "él/ella": "dramatizará",              "nosotros": "dramatizaremos",              "vosotros": "dramatizaréis",              "ellos/ellas": "dramatizarán"},
-        "pluperfect_subjunctive": {"yo": "hubiera dramatizado",      "tú": "hubieras dramatizado",      "él/ella": "hubiera dramatizado",      "nosotros": "hubiéramos dramatizado",      "vosotros": "hubierais dramatizado",      "ellos/ellas": "hubieran dramatizado"},
-    },
-    "actuar": {
-        "english": "to act", "sentence": "{actuar} en la telenovela más popular del canal.",
-        "present":                {"yo": "actúo",                    "tú": "actúas",                    "él/ella": "actúa",                    "nosotros": "actuamos",                    "vosotros": "actuáis",                    "ellos/ellas": "actúan"},
-        "preterite":              {"yo": "actué",                    "tú": "actuaste",                  "él/ella": "actuó",                    "nosotros": "actuamos",                    "vosotros": "actuasteis",                 "ellos/ellas": "actuaron"},
-        "imperfect":              {"yo": "actuaba",                  "tú": "actuabas",                  "él/ella": "actuaba",                  "nosotros": "actuábamos",                  "vosotros": "actuabais",                  "ellos/ellas": "actuaban"},
-        "future":                 {"yo": "actuaré",                  "tú": "actuarás",                  "él/ella": "actuará",                  "nosotros": "actuaremos",                  "vosotros": "actuaréis",                  "ellos/ellas": "actuarán"},
-        "pluperfect_subjunctive": {"yo": "hubiera actuado",          "tú": "hubieras actuado",          "él/ella": "hubiera actuado",          "nosotros": "hubiéramos actuado",          "vosotros": "hubierais actuado",          "ellos/ellas": "hubieran actuado"},
-    },
-    "escribir": {
-        "english": "to write", "sentence": "{escribir} un cuento para el festival literario.",
-        "present":                {"yo": "escribo",                  "tú": "escribes",                  "él/ella": "escribe",                  "nosotros": "escribimos",                  "vosotros": "escribís",                   "ellos/ellas": "escriben"},
-        "preterite":              {"yo": "escribí",                  "tú": "escribiste",                "él/ella": "escribió",                 "nosotros": "escribimos",                  "vosotros": "escribisteis",               "ellos/ellas": "escribieron"},
-        "imperfect":              {"yo": "escribía",                 "tú": "escribías",                 "él/ella": "escribía",                 "nosotros": "escribíamos",                 "vosotros": "escribíais",                 "ellos/ellas": "escribían"},
-        "future":                 {"yo": "escribiré",                "tú": "escribirás",                "él/ella": "escribirá",                "nosotros": "escribiremos",                "vosotros": "escribiréis",                "ellos/ellas": "escribirán"},
-        "pluperfect_subjunctive": {"yo": "hubiera escrito",          "tú": "hubieras escrito",          "él/ella": "hubiera escrito",          "nosotros": "hubiéramos escrito",          "vosotros": "hubierais escrito",          "ellos/ellas": "hubieran escrito"},
-    },
-    "aplaudir": {
-        "english": "to applaud", "sentence": "{aplaudir} al actor al final del espectáculo.",
-        "present":                {"yo": "aplaudo",                  "tú": "aplaudes",                  "él/ella": "aplaude",                  "nosotros": "aplaudimos",                  "vosotros": "aplaudís",                   "ellos/ellas": "aplauden"},
-        "preterite":              {"yo": "aplaudí",                  "tú": "aplaudiste",                "él/ella": "aplaudió",                 "nosotros": "aplaudimos",                  "vosotros": "aplaudisteis",               "ellos/ellas": "aplaudieron"},
-        "imperfect":              {"yo": "aplaudía",                 "tú": "aplaudías",                 "él/ella": "aplaudía",                 "nosotros": "aplaudíamos",                 "vosotros": "aplaudíais",                 "ellos/ellas": "aplaudían"},
-        "future":                 {"yo": "aplaudiré",                "tú": "aplaudirás",                "él/ella": "aplaudirá",                "nosotros": "aplaudiremos",                "vosotros": "aplaudiréis",                "ellos/ellas": "aplaudirán"},
-        "pluperfect_subjunctive": {"yo": "hubiera aplaudido",        "tú": "hubieras aplaudido",        "él/ella": "hubiera aplaudido",        "nosotros": "hubiéramos aplaudido",        "vosotros": "hubierais aplaudido",        "ellos/ellas": "hubieran aplaudido"},
-    },
-    "esculpir": {
-        "english": "to sculpt", "sentence": "{esculpir} una estatua de mármol para la exposición.",
-        "present":                {"yo": "esculpo",                  "tú": "esculpes",                  "él/ella": "esculpe",                  "nosotros": "esculpimos",                  "vosotros": "esculpís",                   "ellos/ellas": "esculpen"},
-        "preterite":              {"yo": "esculpí",                  "tú": "esculpiste",                "él/ella": "esculpió",                 "nosotros": "esculpimos",                  "vosotros": "esculpisteis",               "ellos/ellas": "esculpieron"},
-        "imperfect":              {"yo": "esculpía",                 "tú": "esculpías",                 "él/ella": "esculpía",                 "nosotros": "esculpíamos",                 "vosotros": "esculpíais",                 "ellos/ellas": "esculpían"},
-        "future":                 {"yo": "esculpiré",                "tú": "esculpirás",                "él/ella": "esculpirá",                "nosotros": "esculpiremos",                "vosotros": "esculpiréis",                "ellos/ellas": "esculpirán"},
-        "pluperfect_subjunctive": {"yo": "hubiera esculpido",        "tú": "hubieras esculpido",        "él/ella": "hubiera esculpido",        "nosotros": "hubiéramos esculpido",        "vosotros": "hubierais esculpido",        "ellos/ellas": "hubieran esculpido"},
-    },
-    "dirigir": {
-        "english": "to direct", "sentence": "{dirigir} la orquesta con mucho talento.",
-        "present":                {"yo": "dirijo",                   "tú": "diriges",                   "él/ella": "dirige",                   "nosotros": "dirigimos",                   "vosotros": "dirigís",                    "ellos/ellas": "dirigen"},
-        "preterite":              {"yo": "dirigí",                   "tú": "dirigiste",                 "él/ella": "dirigió",                  "nosotros": "dirigimos",                   "vosotros": "dirigisteis",                "ellos/ellas": "dirigieron"},
-        "imperfect":              {"yo": "dirigía",                  "tú": "dirigías",                  "él/ella": "dirigía",                  "nosotros": "dirigíamos",                  "vosotros": "dirigíais",                  "ellos/ellas": "dirigían"},
-        "future":                 {"yo": "dirigiré",                 "tú": "dirigirás",                 "él/ella": "dirigirá",                 "nosotros": "dirigiremos",                 "vosotros": "dirigiréis",                 "ellos/ellas": "dirigirán"},
-        "pluperfect_subjunctive": {"yo": "hubiera dirigido",         "tú": "hubieras dirigido",         "él/ella": "hubiera dirigido",         "nosotros": "hubiéramos dirigido",         "vosotros": "hubierais dirigido",         "ellos/ellas": "hubieran dirigido"},
-    },
-    "tejer": {
-        "english": "to knit / weave", "sentence": "{tejer} una manta colorida para el invierno.",
-        "present":                {"yo": "tejo",                     "tú": "tejes",                     "él/ella": "teje",                     "nosotros": "tejemos",                     "vosotros": "tejéis",                     "ellos/ellas": "tejen"},
-        "preterite":              {"yo": "tejí",                     "tú": "tejiste",                   "él/ella": "tejió",                    "nosotros": "tejimos",                     "vosotros": "tejisteis",                  "ellos/ellas": "tejieron"},
-        "imperfect":              {"yo": "tejía",                    "tú": "tejías",                    "él/ella": "tejía",                    "nosotros": "tejíamos",                    "vosotros": "tejíais",                    "ellos/ellas": "tejían"},
-        "future":                 {"yo": "tejeré",                   "tú": "tejerás",                   "él/ella": "tejerá",                   "nosotros": "tejeremos",                   "vosotros": "tejeréis",                   "ellos/ellas": "tejerán"},
-        "pluperfect_subjunctive": {"yo": "hubiera tejido",           "tú": "hubieras tejido",           "él/ella": "hubiera tejido",           "nosotros": "hubiéramos tejido",           "vosotros": "hubierais tejido",           "ellos/ellas": "hubieran tejido"},
-    },
-    "componer": {
-        "english": "to compose", "sentence": "{componer} una ópera famosa para el teatro nacional.",
-        "present":                {"yo": "compongo",                 "tú": "compones",                  "él/ella": "compone",                  "nosotros": "componemos",                  "vosotros": "componéis",                  "ellos/ellas": "componen"},
-        "preterite":              {"yo": "compuse",                  "tú": "compusiste",                "él/ella": "compuso",                  "nosotros": "compusimos",                  "vosotros": "compusisteis",               "ellos/ellas": "compusieron"},
-        "imperfect":              {"yo": "componía",                 "tú": "componías",                 "él/ella": "componía",                 "nosotros": "componíamos",                 "vosotros": "componíais",                 "ellos/ellas": "componían"},
-        "future":                 {"yo": "compondré",                "tú": "compondrás",                "él/ella": "compondrá",                "nosotros": "compondremos",                "vosotros": "compondréis",                "ellos/ellas": "compondrán"},
-        "pluperfect_subjunctive": {"yo": "hubiera compuesto",        "tú": "hubieras compuesto",        "él/ella": "hubiera compuesto",        "nosotros": "hubiéramos compuesto",        "vosotros": "hubierais compuesto",        "ellos/ellas": "hubieran compuesto"},
-    },
-    "aburrirse": {
-        "english": "to get bored", "sentence": "{aburrirse} durante el documental muy largo.",
-        "present":                {"yo": "me aburro",                "tú": "te aburres",                "él/ella": "se aburre",                "nosotros": "nos aburrimos",               "vosotros": "os aburrís",                 "ellos/ellas": "se aburren"},
-        "preterite":              {"yo": "me aburrí",                "tú": "te aburriste",              "él/ella": "se aburrió",               "nosotros": "nos aburrimos",               "vosotros": "os aburrísteis",             "ellos/ellas": "se aburrieron"},
-        "imperfect":              {"yo": "me aburría",               "tú": "te aburrías",               "él/ella": "se aburría",               "nosotros": "nos aburríamos",              "vosotros": "os aburríais",               "ellos/ellas": "se aburrían"},
-        "future":                 {"yo": "me aburriré",              "tú": "te aburrirás",              "él/ella": "se aburrirá",              "nosotros": "nos aburriremos",             "vosotros": "os aburriréis",              "ellos/ellas": "se aburrirán"},
-        "pluperfect_subjunctive": {"yo": "me hubiera aburrido",      "tú": "te hubieras aburrido",      "él/ella": "se hubiera aburrido",      "nosotros": "nos hubiéramos aburrido",     "vosotros": "os hubierais aburrido",      "ellos/ellas": "se hubieran aburrido"},
-    },
-    "divertirse": {
-        "english": "to have fun / enjoy oneself", "sentence": "{divertirse} mucho en el festival de arte.",
-        "present":                {"yo": "me divierto",              "tú": "te diviertes",              "él/ella": "se divierte",              "nosotros": "nos divertimos",              "vosotros": "os divertís",                "ellos/ellas": "se divierten"},
-        "preterite":              {"yo": "me divertí",               "tú": "te divertiste",             "él/ella": "se divirtió",              "nosotros": "nos divertimos",              "vosotros": "os divertisteis",            "ellos/ellas": "se divirtieron"},
-        "imperfect":              {"yo": "me divertía",              "tú": "te divertías",              "él/ella": "se divertía",              "nosotros": "nos divertíamos",             "vosotros": "os divertíais",              "ellos/ellas": "se divertían"},
-        "future":                 {"yo": "me divertiré",             "tú": "te divertirás",             "él/ella": "se divertirá",             "nosotros": "nos divertiremos",            "vosotros": "os divertiréis",             "ellos/ellas": "se divertirán"},
-        "pluperfect_subjunctive": {"yo": "me hubiera divertido",     "tú": "te hubieras divertido",     "él/ella": "se hubiera divertido",     "nosotros": "nos hubiéramos divertido",    "vosotros": "os hubierais divertido",     "ellos/ellas": "se hubieran divertido"},
-    },
-}
-# fmt: on
-
-# ── Conditional tense (Lesson 2) ──────────────────────────────────────────────
-
-CONDITIONAL_PRONOUNS = ["yo", "tú", "usted/él/ella", "nosotros/as", "ustedes/ellos/ellas"]
-CONDITIONAL_TENSE = {"conditional": "Condicional"}
-
-# fmt: off
-CONDITIONAL_VERBS: dict[str, dict] = {
-    # ── haber / tener family ───────────────────────────────────────────────────
-    "haber": {
-        "english": "to have (aux) / there would be",
-        "sentence": "Ojalá {haber} más tiempo para practicar el español.",
-        "conditional": {"yo": "habría",      "tú": "habrías",      "usted/él/ella": "habría",      "nosotros/as": "habríamos",      "ustedes/ellos/ellas": "habrían"},
-    },
-    "tener": {
-        "english": "to have",
-        "sentence": "{tener} que estudiar más para el examen.",
-        "conditional": {"yo": "tendría",     "tú": "tendrías",     "usted/él/ella": "tendría",     "nosotros/as": "tendríamos",     "ustedes/ellos/ellas": "tendrían"},
-    },
-    "abstener": {
-        "english": "to abstain",
-        "sentence": "{abstener} de votar si no conociera bien al candidato.",
-        "conditional": {"yo": "abstendría",  "tú": "abstendrías",  "usted/él/ella": "abstendría",  "nosotros/as": "abstendríamos",  "ustedes/ellos/ellas": "abstendrían"},
-    },
-    "contener": {
-        "english": "to contain",
-        "sentence": "El informe {contener} información muy valiosa.",
-        "conditional": {"yo": "contendría",  "tú": "contendrías",  "usted/él/ella": "contendría",  "nosotros/as": "contendríamos",  "ustedes/ellos/ellas": "contendrían"},
-    },
-    "detener": {
-        "english": "to stop / detain",
-        "sentence": "{detener} el proyecto para revisarlo.",
-        "conditional": {"yo": "detendría",   "tú": "detendrías",   "usted/él/ella": "detendría",   "nosotros/as": "detendríamos",   "ustedes/ellos/ellas": "detendrían"},
-    },
-    "mantener": {
-        "english": "to maintain / keep",
-        "sentence": "{mantener} la calma en una situación difícil.",
-        "conditional": {"yo": "mantendría",  "tú": "mantendrías",  "usted/él/ella": "mantendría",  "nosotros/as": "mantendríamos",  "ustedes/ellos/ellas": "mantendrían"},
-    },
-    "obtener": {
-        "english": "to obtain / get",
-        "sentence": "{obtener} mejores notas con más práctica.",
-        "conditional": {"yo": "obtendría",   "tú": "obtendrías",   "usted/él/ella": "obtendría",   "nosotros/as": "obtendríamos",   "ustedes/ellos/ellas": "obtendrían"},
-    },
-    "sostener": {
-        "english": "to hold / sustain",
-        "sentence": "{sostener} esa opinión con buenos argumentos.",
-        "conditional": {"yo": "sostendría",  "tú": "sostendrías",  "usted/él/ella": "sostendría",  "nosotros/as": "sostendríamos",  "ustedes/ellos/ellas": "sostendrían"},
-    },
-    # ── caber ─────────────────────────────────────────────────────────────────
-    "caber": {
-        "english": "to fit",
-        "sentence": "Toda la ropa {caber} en una maleta pequeña.",
-        "conditional": {"yo": "cabría",      "tú": "cabrías",      "usted/él/ella": "cabría",      "nosotros/as": "cabríamos",      "ustedes/ellos/ellas": "cabrían"},
-    },
-    # ── hacer family ──────────────────────────────────────────────────────────
-    "hacer": {
-        "english": "to do / make",
-        "sentence": "{hacer} la tarea más rápido con mejor concentración.",
-        "conditional": {"yo": "haría",       "tú": "harías",       "usted/él/ella": "haría",       "nosotros/as": "haríamos",       "ustedes/ellos/ellas": "harían"},
-    },
-    "deshacer": {
-        "english": "to undo / undo",
-        "sentence": "{deshacer} los errores con paciencia y dedicación.",
-        "conditional": {"yo": "desharía",    "tú": "desharías",    "usted/él/ella": "desharía",    "nosotros/as": "desharíamos",    "ustedes/ellos/ellas": "desharían"},
-    },
-    "rehacer": {
-        "english": "to redo",
-        "sentence": "{rehacer} el ejercicio para mejorar la calificación.",
-        "conditional": {"yo": "reharía",     "tú": "reharías",     "usted/él/ella": "reharía",     "nosotros/as": "reharíamos",     "ustedes/ellos/ellas": "reharían"},
-    },
-    "satisfacer": {
-        "english": "to satisfy",
-        "sentence": "{satisfacer} todos los requisitos del programa.",
-        "conditional": {"yo": "satisfaría",  "tú": "satisfarías",  "usted/él/ella": "satisfaría",  "nosotros/as": "satisfaríamos",  "ustedes/ellos/ellas": "satisfarían"},
-    },
-    # ── poder ─────────────────────────────────────────────────────────────────
-    "poder": {
-        "english": "to be able to / can",
-        "sentence": "{poder} hablar español con fluidez con más práctica.",
-        "conditional": {"yo": "podría",      "tú": "podrías",      "usted/él/ella": "podría",      "nosotros/as": "podríamos",      "ustedes/ellos/ellas": "podrían"},
-    },
-    # ── poner family ──────────────────────────────────────────────────────────
-    "poner": {
-        "english": "to put / place",
-        "sentence": "{poner} más atención en la pronunciación.",
-        "conditional": {"yo": "pondría",     "tú": "pondrías",     "usted/él/ella": "pondría",     "nosotros/as": "pondríamos",     "ustedes/ellos/ellas": "pondrían"},
-    },
-    "componer": {
-        "english": "to compose",
-        "sentence": "{componer} una canción en español si supiera música.",
-        "conditional": {"yo": "compondría",  "tú": "compondrías",  "usted/él/ella": "compondría",  "nosotros/as": "compondríamos",  "ustedes/ellos/ellas": "compondrían"},
-    },
-    "exponer": {
-        "english": "to expose / present",
-        "sentence": "{exponer} las ideas con mayor claridad.",
-        "conditional": {"yo": "expondría",   "tú": "expondrías",   "usted/él/ella": "expondría",   "nosotros/as": "expondríamos",   "ustedes/ellos/ellas": "expondrían"},
-    },
-    "imponer": {
-        "english": "to impose",
-        "sentence": "{imponer} nuevas reglas para mejorar la disciplina.",
-        "conditional": {"yo": "impondría",   "tú": "impondrías",   "usted/él/ella": "impondría",   "nosotros/as": "impondríamos",   "ustedes/ellos/ellas": "impondrían"},
-    },
-    "oponer": {
-        "english": "to oppose",
-        "sentence": "{oponer} resistencia a los cambios innecesarios.",
-        "conditional": {"yo": "opondría",    "tú": "opondrías",    "usted/él/ella": "opondría",    "nosotros/as": "opondríamos",    "ustedes/ellos/ellas": "opondrían"},
-    },
-    "proponer": {
-        "english": "to propose",
-        "sentence": "{proponer} una solución creativa al problema.",
-        "conditional": {"yo": "propondría",  "tú": "propondrías",  "usted/él/ella": "propondría",  "nosotros/as": "propondríamos",  "ustedes/ellos/ellas": "propondrían"},
-    },
-    "suponer": {
-        "english": "to suppose / assume",
-        "sentence": "{suponer} que ya sabes la respuesta correcta.",
-        "conditional": {"yo": "supondría",   "tú": "supondrías",   "usted/él/ella": "supondría",   "nosotros/as": "supondríamos",   "ustedes/ellos/ellas": "supondrían"},
-    },
-    # ── querer / saber ────────────────────────────────────────────────────────
-    "querer": {
-        "english": "to want / love",
-        "sentence": "{querer} visitar España y aprender más español.",
-        "conditional": {"yo": "querría",     "tú": "querrías",     "usted/él/ella": "querría",     "nosotros/as": "querríamos",     "ustedes/ellos/ellas": "querrían"},
-    },
-    "saber": {
-        "english": "to know",
-        "sentence": "{saber} la respuesta si hubieras estudiado más.",
-        "conditional": {"yo": "sabría",      "tú": "sabrías",      "usted/él/ella": "sabría",      "nosotros/as": "sabríamos",      "ustedes/ellos/ellas": "sabrían"},
-    },
-    # ── venir family ──────────────────────────────────────────────────────────
-    "venir": {
-        "english": "to come",
-        "sentence": "{venir} a la clase de conversación los viernes.",
-        "conditional": {"yo": "vendría",     "tú": "vendrías",     "usted/él/ella": "vendría",     "nosotros/as": "vendríamos",     "ustedes/ellos/ellas": "vendrían"},
-    },
-    "convenir": {
-        "english": "to be convenient / suit",
-        "sentence": "{convenir} repasar el vocabulario antes del examen.",
-        "conditional": {"yo": "convendría",  "tú": "convendrías",  "usted/él/ella": "convendría",  "nosotros/as": "convendríamos",  "ustedes/ellos/ellas": "convendrían"},
-    },
-    "prevenir": {
-        "english": "to prevent / warn",
-        "sentence": "{prevenir} los malentendidos con comunicación clara.",
-        "conditional": {"yo": "prevendría",  "tú": "prevendrías",  "usted/él/ella": "prevendría",  "nosotros/as": "prevendríamos",  "ustedes/ellos/ellas": "prevendrían"},
-    },
-    "provenir": {
-        "english": "to come from / originate",
-        "sentence": "Las palabras {provenir} de raíces de otros idiomas.",
-        "conditional": {"yo": "provendría",  "tú": "provendrías",  "usted/él/ella": "provendría",  "nosotros/as": "provendríamos",  "ustedes/ellos/ellas": "provendrían"},
-    },
-    # ── decir / salir / valer ─────────────────────────────────────────────────
-    "decir": {
-        "english": "to say / tell",
-        "sentence": "{decir} la verdad aunque fuera difícil.",
-        "conditional": {"yo": "diría",       "tú": "dirías",       "usted/él/ella": "diría",       "nosotros/as": "diríamos",       "ustedes/ellos/ellas": "dirían"},
-    },
-    "salir": {
-        "english": "to leave / go out",
-        "sentence": "{salir} más a practicar el español si tuviera tiempo.",
-        "conditional": {"yo": "saldría",     "tú": "saldrías",     "usted/él/ella": "saldría",     "nosotros/as": "saldríamos",     "ustedes/ellos/ellas": "saldrían"},
-    },
-    "valer": {
-        "english": "to be worth",
-        "sentence": "{valer} la pena aprender un nuevo idioma.",
-        "conditional": {"yo": "valdría",     "tú": "valdrías",     "usted/él/ella": "valdría",     "nosotros/as": "valdríamos",     "ustedes/ellos/ellas": "valdrían"},
-    },
-}
-# fmt: on
-
 # ── Vocabulary: Un Sinnúmero de Números ──────────────────────────────────────
 
 VOCABULARY_NUMBERS = {
-    # ── Cardinal numbers ──────────────────────────────────────────────────────
     "cero":              ["zero", "0"],
     "uno / un":          ["one", "1"],
     "dos":               ["two", "2"],
@@ -458,7 +104,6 @@ VOCABULARY_NUMBERS = {
     "cien mil":          ["one hundred thousand", "100000"],
     "quinientos mil":    ["five hundred thousand", "500000"],
     "un millón":         ["one million", "1000000"],
-    # ── Ordinal numbers ───────────────────────────────────────────────────────
     "primero / primer":          ["first", "1st"],
     "segundo":                   ["second", "2nd"],
     "tercero / tercer":          ["third", "3rd"],
@@ -516,7 +161,6 @@ VOCABULARY_NUMBERS = {
 # ── Vocabulary: Lección 4 — El Mundo del Trabajo ─────────────────────────────
 
 VOCABULARY_L4 = {
-    # Las Ocupaciones / los Títulos
     "el/la abogado/a": ["lawyer"], "el actor": ["actor"],
     "la actriz": ["actress"], "el/la arqueólogo/a": ["archaeologist"],
     "el/la arquitecto/a": ["architect"], "el/la bombero/a": ["firefighter"],
@@ -534,13 +178,11 @@ VOCABULARY_L4 = {
     "el/la periodista": ["journalist"], "el/la secretario/a": ["secretary"],
     "el/la técnico/a": ["technician"], "el/la doctor/a": ["doctor"],
     "el/la enfermero/a": ["nurse"], "el/la dentista": ["dentist"],
-    # Campos de Estudio
     "derecho": ["law"], "actuación": ["acting"],
     "arqueología": ["archaeology"], "culinaria": ["culinary arts"],
     "consejería": ["counseling"], "economía": ["economics"],
     "diseño": ["design"], "periodismo": ["journalism"],
     "medicina": ["medicine"], "odontología": ["dentistry"],
-    # El Mundo del Trabajo
     "el ascenso": ["promotion", "raise"], "la promoción": ["promotion"],
     "el aumento": ["raise", "increase"],
     "el sueldo": ["salary", "wage"], "el salario": ["salary"],
@@ -556,14 +198,12 @@ VOCABULARY_L4 = {
     "comercial": ["commercial"], "dentro de": ["within"],
     "próximo": ["next"], "vacaciones": ["vacation"],
     "sobresueldo": ["bonus"],
-    # La Entrevista
     "el anuncio": ["advertisement", "announcement"],
     "el/la aspirante": ["applicant", "candidate"],
     "los beneficios": ["benefits"],
     "el currículo": ["résumé", "CV"], "la hoja de vida": ["résumé", "CV"],
     "el entrevistado": ["interviewee"], "el entrevistador": ["interviewer"],
     "la solicitud de trabajo": ["job application"],
-    # Verbos
     "ascender": ["to promote", "to rise"], "graduarse": ["to graduate"],
     "contratar": ["to hire"], "entrevistar": ["to interview"],
     "ganar": ["to earn", "to win"], "obtener": ["to obtain", "to get"],
@@ -670,347 +310,337 @@ VOCABULARY_L6 = {
     "Como si …": ["as if"],
 }
 
-# ── Compound tenses (Lessons 3 & 4) ──────────────────────────────────────────
+# ── Vocabulary: El Subjuntivo con Expresiones Impersonales ────────────────────
+# (yellow sheet — all expressions trigger subjunctive except the ★★☺ group)
 
-COMPOUND_TENSE_NAMES = {
-    "present_perfect":             "Presente Perfecto de Indicativo",
-    "pluperfect_indicative":       "Pluscuamperfecto de Indicativo",
-    "future_perfect":              "Futuro Perfecto de Indicativo",
-    "conditional_perfect":         "Condicional Perfecto",
-    "present_perfect_subjunctive": "Presente Perfecto del Subjuntivo",
-    "pluperfect_subjunctive":      "Pluscuamperfecto del Subjuntivo",
+VOCABULARY_SUBJ_IMPERSONAL = {
+    "es absurdo":          ["it's absurd"],
+    "es agradable":        ["it's agreeable", "it's pleasant"],
+    "es bueno":            ["it is good"],
+    "es conveniente":      ["it is convenient"],
+    "es difícil":          ["it is difficult"],
+    "es dudoso":           ["it's doubtful"],
+    "es escandaloso":      ["it's scandalous"],
+    "es extraño":          ["it's strange"],
+    "es raro":             ["it's strange", "it's weird"],
+    "es fácil":            ["it is easy"],
+    "es importante":       ["it is important"],
+    "es imposible":        ["it is impossible"],
+    "es improbable":       ["it is improbable"],
+    "es inconveniente":    ["it is inconvenient", "it is unsuitable"],
+    "es indispensable":    ["it's indispensable"],
+    "es inútil":           ["it is useless"],
+    "es increíble":        ["it is incredible", "it is unbelievable"],
+    "es justo":            ["it is just", "it is proper"],
+    "es una lástima":      ["it is a shame"],
+    "es malo":             ["it is bad"],
+    "es mejor":            ["it is best", "it is better"],
+    "es natural":          ["it is natural"],
+    "es necesario":        ["it is necessary"],
+    "es normal":           ["it's normal"],
+    "es peor":             ["it is worse"],
+    "es posible":          ["it is possible"],
+    "es probable":         ["it is probable", "it is likely"],
+    "es ridículo":         ["it's ridiculous"],
+    "es sorprendente":     ["it is surprising"],
+    "es triste":           ["it's sad"],
+    "es terrible":         ["it's terrible"],
+    "es fantástico":       ["it's fantastic"],
+    "es urgente":          ["it's urgent"],
+    "es útil":             ["it is useful"],
+    "más vale":            ["it is better"],
+    "parece increíble":    ["it seems incredible"],
+    "parece mentira":      ["it seems untrue"],
+    "puede ser":           ["it may be"],
+    "vale la pena":        ["it is worthwhile"],
+    # ★★☺ group — these take INDICATIVE
+    "es cierto":           ["it is certain"],
+    "es claro":            ["it is clear"],
+    "es evidente":         ["it is evident"],
+    "es obvio":            ["it is obvious"],
+    "es seguro":           ["it is sure"],
+    "es verdad":           ["it is true"],
+    "no hay duda":         ["there is no doubt"],
 }
 
-_HABER: dict[str, list[str]] = {
-    "present_perfect":             ["he",      "has",      "ha",      "hemos",      "habéis",    "han"],
-    "pluperfect_indicative":       ["había",   "habías",   "había",   "habíamos",   "habíais",   "habían"],
-    "future_perfect":              ["habré",   "habrás",   "habrá",   "habremos",   "habréis",   "habrán"],
-    "conditional_perfect":         ["habría",  "habrías",  "habría",  "habríamos",  "habríais",  "habrían"],
-    "present_perfect_subjunctive": ["haya",    "hayas",    "haya",    "hayamos",    "hayáis",    "hayan"],
-    "pluperfect_subjunctive":      ["hubiera", "hubieras", "hubiera", "hubiéramos", "hubierais", "hubieran"],
-}
-_REFLEXIVE_PRONOUNS = ["me", "te", "se", "nos", "os", "se"]
+# ── Vocabulary: El Subjuntivo con Expresiones de Duda e Incertidumbre ─────────
+# (green sheet)
 
-
-def _compound(participle: str, reflexive: bool = False) -> dict[str, dict[str, str]]:
-    """Generate all 6 compound-tense conjugations from a past participle."""
-    result: dict[str, dict[str, str]] = {}
-    for tense, forms in _HABER.items():
-        d: dict[str, str] = {}
-        for i, p in enumerate(PRONOUNS):
-            if reflexive:
-                d[p] = f"{_REFLEXIVE_PRONOUNS[i]} {forms[i]} {participle}"
-            else:
-                d[p] = f"{forms[i]} {participle}"
-        result[tense] = d
-    return result
-
-
-# ── Lección 4 compound-tense verbs ──────────────────────────────────────────
-
-L4_COMPOUND_VERBS: dict[str, dict] = {
-    "ascender": {
-        "english": "to promote / rise",
-        "sentence": "{ascender} a un puesto más alto en la empresa.",
-        **_compound("ascendido"),
-    },
-    "graduarse": {
-        "english": "to graduate",
-        "sentence": "{graduarse} de la universidad con honores.",
-        **_compound("graduado", reflexive=True),
-    },
-    "contratar": {
-        "english": "to hire",
-        "sentence": "{contratar} a un nuevo empleado para la oficina.",
-        **_compound("contratado"),
-    },
-    "entrevistar": {
-        "english": "to interview",
-        "sentence": "{entrevistar} a los aspirantes para el puesto.",
-        **_compound("entrevistado"),
-    },
-    "ganar": {
-        "english": "to earn / win",
-        "sentence": "{ganar} un buen sueldo en la compañía.",
-        **_compound("ganado"),
-    },
-    "obtener": {
-        "english": "to obtain / get",
-        "sentence": "{obtener} el título de abogado después de estudiar derecho.",
-        **_compound("obtenido"),
-    },
-    "solicitar": {
-        "english": "to apply for / request",
-        "sentence": "{solicitar} el empleo en la empresa internacional.",
-        **_compound("solicitado"),
-    },
-    "defender": {
-        "english": "to defend",
-        "sentence": "{defender} los derechos de los trabajadores.",
-        **_compound("defendido"),
-    },
-    "estudiar": {
-        "english": "to study",
-        "sentence": "{estudiar} economía en la universidad.",
-        **_compound("estudiado"),
-    },
-    "aplicar": {
-        "english": "to apply",
-        "sentence": "{aplicar} los conocimientos en el trabajo.",
-        **_compound("aplicado"),
-    },
-    "buscar": {
-        "english": "to search / look for",
-        "sentence": "{buscar} un puesto mejor en otra compañía.",
-        **_compound("buscado"),
-    },
-    "aumentar": {
-        "english": "to increase / raise",
-        "sentence": "{aumentar} la producción de la empresa.",
-        **_compound("aumentado"),
-    },
-    "emplear": {
-        "english": "to employ",
-        "sentence": "{emplear} a más técnicos en la firma.",
-        **_compound("empleado"),
-    },
-    "negociar": {
-        "english": "to negotiate",
-        "sentence": "{negociar} un mejor salario con el gerente.",
-        **_compound("negociado"),
-    },
-    "reunirse": {
-        "english": "to meet / get together",
-        "sentence": "{reunirse} con el equipo para la videoconferencia.",
-        **_compound("reunido", reflexive=True),
-    },
-    "trabajar": {
-        "english": "to work",
-        "sentence": "{trabajar} desde casa con el teletrabajo.",
-        **_compound("trabajado"),
-    },
-    "dejar": {
-        "english": "to leave / quit",
-        "sentence": "{dejar} el puesto para aceptar una oferta mejor.",
-        **_compound("dejado"),
-    },
-    "despedir": {
-        "english": "to fire / dismiss",
-        "sentence": "{despedir} al empleado por bajo rendimiento.",
-        **_compound("despedido"),
-    },
-    "invertir": {
-        "english": "to invest",
-        "sentence": "{invertir} en los negocios internacionales.",
-        **_compound("invertido"),
-    },
-    "aceptar": {
-        "english": "to accept",
-        "sentence": "{aceptar} la oferta de trabajo después de la entrevista.",
-        **_compound("aceptado"),
-    },
-    "renunciar": {
-        "english": "to resign / give up",
-        "sentence": "{renunciar} al empleo para empezar su propia empresa.",
-        **_compound("renunciado"),
-    },
-    "comerciar": {
-        "english": "to trade",
-        "sentence": "{comerciar} con empresas de otros países.",
-        **_compound("comerciado"),
-    },
+VOCABULARY_SUBJ_DOUBT = {
+    # → subjuntivo group
+    "dudar":               ["to doubt"],
+    "negar":               ["to deny"],
+    "no creer":            ["to not believe"],
+    "no pensar":           ["to not think"],
+    "no estar seguro/a de": ["to not be sure"],
+    "no es seguro":        ["it is not sure"],
+    "no es cierto":        ["it is not certain"],
+    "no es verdad":        ["it is not true"],
+    "quizás":              ["perhaps", "maybe"],
+    "tal vez":             ["perhaps", "maybe"],
+    # → indicativo group
+    "no dudar":            ["to not doubt"],
+    "no negar":            ["to not deny"],
+    "creer":               ["to believe"],
+    "pensar":              ["to think"],
+    "estar seguro/a de":   ["to be sure"],
+    "es cierto":           ["it is certain"],
+    "es verdad":           ["it is true"],
 }
 
-# ── Lección 6 compound-tense verbs ──────────────────────────────────────────
+# ── Vocabulary: Expresiones de Voluntad y Deseo con el Subjuntivo ─────────────
+# (violet sheet — upper vocabulary section only)
 
-L6_COMPOUND_VERBS: dict[str, dict] = {
-    "anunciar": {
-        "english": "to announce",
-        "sentence": "{anunciar} las noticias de última hora en el noticiero.",
-        **_compound("anunciado"),
+VOCABULARY_SUBJ_WILL = {
+    "ojalá":               ["hopefully"],
+    "esperar":             ["to hope", "to expect"],
+    "querer":              ["to want"],
+    "desear":              ["to desire", "to wish"],
+    "preferir":            ["to prefer"],
+    "recomendar":          ["to recommend"],
+    "sugerir":             ["to suggest"],
+    "insistir en":         ["to insist"],
+    "decir":               ["to say", "to tell"],
+    "necesitar":           ["to need"],
+    "pedir":               ["to ask", "to request"],
+    "mandar":              ["to command", "to order"],
+    "exigir":              ["to demand"],
+    "suplicar":            ["to plead"],
+    "rogar":               ["to beg"],
+    "oponerse a":          ["to oppose"],
+    "aconsejar":           ["to advise"],
+    "dejar":               ["to allow"],
+    "permitir":            ["to permit"],
+    "prohibir":            ["to prohibit"],
+}
+
+# ── Práctica lessons ──────────────────────────────────────────────────────────
+#
+# Each exercise has:
+#   before   — text before the blank
+#   after    — text after the blank (empty string if blank is at the end)
+#   hint     — infinitive shown in parentheses on the worksheet
+#   answer   — primary correct answer
+#   alts     — list of additional accepted answers
+#
+# Lessons with an "intro" key show an explanation screen before the exercises.
+# intro is a list of blocks: {"type": "rule"|"examples"|"note", ...}
+
+PRACTICA_LESSONS: dict[str, dict] = {
+    # ── Lesson 1: green sheet ─────────────────────────────────────────────────
+    "1": {
+        "title": "Duda e Incertidumbre",
+        "subtitle": "Subjuntivo vs. Indicativo",
+        "intro": None,
+        "exercises": [
+            {
+                "before": "Dudamos que la universidad",
+                "after":  "a Luisa el año que viene.",
+                "hint":   "aceptar",
+                "answer": "acepte",
+                "alts":   [],
+            },
+            {
+                "before": "No estoy seguro que yo",
+                "after":  "acompañarte a la fiesta este fin de semana.",
+                "hint":   "poder",
+                "answer": "pueda",
+                "alts":   [],
+            },
+            {
+                "before": "Ellos no creen que el dinero",
+                "after":  "el problema.",
+                "hint":   "ser",
+                "answer": "sea",
+                "alts":   [],
+            },
+            {
+                "before": "Estás muy enfermo. Yo pienso que tú",
+                "after":  "ir al doctor mañana.",
+                "hint":   "necesitar",
+                "answer": "necesitas",
+                "alts":   [],
+            },
+            {
+                "before": "El señor no niega que a veces",
+                "after":  "las luces prendidas.",
+                "hint":   "dejar",
+                "answer": "deja",
+                "alts":   [],
+            },
+            {
+                "before": "Dudo que mi hermano",
+                "after":  "a casa antes de las 11:00 anoche.",
+                "hint":   "volver",
+                "answer": "volviera",
+                "alts":   ["vuelva"],
+            },
+            {
+                "before": "Es cierto que ellos",
+                "after":  "a España en el año 2016.",
+                "hint":   "ir",
+                "answer": "fueron",
+                "alts":   [],
+            },
+        ],
     },
-    "comunicarse": {
-        "english": "to communicate",
-        "sentence": "{comunicarse} con los ciudadanos por la prensa.",
-        **_compound("comunicado", reflexive=True),
-    },
-    "durar": {
-        "english": "to last",
-        "sentence": "{durar} mucho tiempo la huelga de los trabajadores.",
-        **_compound("durado"),
-    },
-    "votar": {
-        "english": "to vote",
-        "sentence": "{votar} en las elecciones presidenciales.",
-        **_compound("votado"),
-    },
-    "elegir": {
-        "english": "to choose / elect",
-        "sentence": "{elegir} al mejor candidato en las elecciones.",
-        **_compound("elegido"),
-    },
-    "informar": {
-        "english": "to inform",
-        "sentence": "{informar} al público sobre el desastre natural.",
-        **_compound("informado"),
-    },
-    "ocurrir": {
-        "english": "to occur / happen",
-        "sentence": "{ocurrir} un terremoto en la región.",
-        **_compound("ocurrido"),
-    },
-    "transmitir": {
-        "english": "to transmit / broadcast",
-        "sentence": "{transmitir} el discurso del representante por la radio.",
-        **_compound("transmitido"),
-    },
-    "emitir": {
-        "english": "to emit / broadcast",
-        "sentence": "{emitir} un informe sobre la violencia en el país.",
-        **_compound("emitido"),
-    },
-    "declarar": {
-        "english": "to declare",
-        "sentence": "{declarar} la paz después de la guerra.",
-        **_compound("declarado"),
-    },
-    "luchar": {
-        "english": "to fight / struggle",
-        "sentence": "{luchar} por la libertad y los derechos del ciudadano.",
-        **_compound("luchado"),
-    },
-    "seguir": {
-        "english": "to follow / continue",
-        "sentence": "{seguir} las noticias sobre la situación internacional.",
-        **_compound("seguido"),
-    },
-    "cumplir": {
-        "english": "to fulfill / comply",
-        "sentence": "{cumplir} con el deber de votar en las elecciones.",
-        **_compound("cumplido"),
-    },
-    "obedecer": {
-        "english": "to obey",
-        "sentence": "{obedecer} las leyes del país para mantener la paz.",
-        **_compound("obedecido"),
-    },
-    "despedirse": {
-        "english": "to say goodbye",
-        "sentence": "{despedirse} de los colegas al final del reportaje.",
-        **_compound("despedido", reflexive=True),
+    # ── Lesson 2: violet sheet ────────────────────────────────────────────────
+    "2": {
+        "title": "Voluntad y Deseo",
+        "subtitle": "Subjuntivo con Expresiones de Voluntad",
+        "intro": [
+            {
+                "type": "rule",
+                "text": (
+                    "Cuando una oración de dos cláusulas empieza con una de estas expresiones "
+                    "y las dos cláusulas tienen sujetos diferentes, se usa el indicativo en la "
+                    "primera cláusula y el subjuntivo en la segunda."
+                ),
+            },
+            {
+                "type": "examples",
+                "items": [
+                    "Yo quiero que tú me <em>visites</em> este verano a fines de julio.",
+                    "Mamá insiste en que los niños <em>hagan</em> la tarea antes de ver la televisión.",
+                    "Ojalá que Raúl <em>tenga</em> dinero suficiente para el viaje.",
+                ],
+            },
+            {
+                "type": "note",
+                "marker": "★",
+                "text": (
+                    "Con el verbo <strong>decir</strong>, se requiere el subjuntivo en la segunda "
+                    "cláusula sólo cuando <em>decir</em> implica un mandato."
+                ),
+                "examples": [
+                    "La maestra dice que nadie <em>hable</em> durante el examen. → mandato",
+                    "La maestra dice que el examen es el viernes. → información",
+                ],
+            },
+            {
+                "type": "note",
+                "marker": "△",
+                "text": (
+                    "Con <strong>aconsejar, dejar, permitir</strong> y <strong>prohibir</strong>, "
+                    "se puede usar un pronombre de complemento indirecto con un infinitivo en la "
+                    "segunda cláusula en vez del subjuntivo."
+                ),
+                "examples": [
+                    "Mis padres no me dejan <em>usar</em> el carro.",
+                    "Mis padres no dejan que yo <em>use</em> el carro.",
+                ],
+            },
+            {
+                "type": "rule",
+                "text": (
+                    "Cuando no hay un cambio de sujeto en la segunda cláusula, se quita "
+                    "\"que\" y se usa el infinitivo."
+                ),
+                "examples": [
+                    "Queremos <em>salir</em> al mediodía.",
+                ],
+            },
+        ],
+        "exercises": [
+            {
+                "before": "El jefe exige que los empleados",
+                "after":  "el proyecto esta semana.",
+                "hint":   "terminar",
+                "answer": "terminen",
+                "alts":   [],
+            },
+            {
+                "before": "Roberto",
+                "after":  "que vayamos por otra calle para evitar el accidente.",
+                "hint":   "sugerir",
+                "answer": "sugiere",
+                "alts":   [],
+            },
+            {
+                "before": "Mis padres se oponen a que yo",
+                "after":  ".",
+                "hint":   "manejar",
+                "answer": "maneje",
+                "alts":   [],
+            },
+            {
+                "before": "Luisa y yo",
+                "after":  "que tú nos esperes aquí.",
+                "hint":   "preferir",
+                "answer": "preferimos",
+                "alts":   [],
+            },
+            {
+                "before": "Ojalá que San Nicolás",
+                "after":  "muchos regalos.",
+                "hint":   "traer",
+                "answer": "traiga",
+                "alts":   [],
+            },
+            {
+                "before": "¡Cuidado, Pablito! Yo no",
+                "after":  "que te caigas.",
+                "hint":   "querer",
+                "answer": "quiero",
+                "alts":   [],
+            },
+            {
+                "before": "El letrero dice que la película",
+                "after":  "a las 8:30.",
+                "hint":   "empezar",
+                "answer": "empieza",
+                "alts":   [],
+            },
+            {
+                "before": "El médico me aconsejó",
+                "after":  "el estrés.",
+                "hint":   "reducir",
+                "answer": "reducir",
+                "alts":   [],
+            },
+        ],
     },
 }
 
-# ── Flat all-in-one conjugation view ─────────────────────────────────────────
-
-ALL_TENSE_NAMES: dict[str, str] = {
-    "present":                     "Presente",
-    "preterite":                   "Pretérito",
-    "imperfect":                   "Imperfecto",
-    "future":                      "Futuro",
-    "conditional":                 "Condicional",
-    "present_perfect":             "Presente Perfecto de Indicativo",
-    "pluperfect_indicative":       "Pluscuamperfecto de Indicativo",
-    "future_perfect":              "Futuro Perfecto de Indicativo",
-    "conditional_perfect":         "Condicional Perfecto",
-    "present_perfect_subjunctive": "Presente Perfecto del Subjuntivo",
-    "pluperfect_subjunctive":      "Pluscuamperfecto del Subjuntivo",
-}
-
-# Remap conditional pronoun keys to standard 6-pronoun set
-_COND_PRON_MAP = {
-    "yo":                    "yo",
-    "tú":                    "tú",
-    "usted/él/ella":         "él/ella",
-    "nosotros/as":           "nosotros",
-    "ustedes/ellos/ellas":   "ellos/ellas",
-}
-
-ALL_CONJUGATION_VERBS: dict[str, dict] = {}
-
-# Merge VERBS, L4_COMPOUND_VERBS, L6_COMPOUND_VERBS (all share standard PRONOUNS)
-for _src in (VERBS, L4_COMPOUND_VERBS, L6_COMPOUND_VERBS):
-    for _verb, _info in _src.items():
-        if _verb not in ALL_CONJUGATION_VERBS:
-            ALL_CONJUGATION_VERBS[_verb] = dict(_info)
-        else:
-            for _k, _v in _info.items():
-                ALL_CONJUGATION_VERBS[_verb].setdefault(_k, _v)
-
-# Merge CONDITIONAL_VERBS (remap pronouns + derive vosotros as yo_form + "is")
-for _verb, _info in CONDITIONAL_VERBS.items():
-    _cond_src = _info["conditional"]
-    _cond_std: dict[str, str] = {}
-    for _old, _new in _COND_PRON_MAP.items():
-        if _old in _cond_src:
-            _cond_std[_new] = _cond_src[_old]
-    # Derive vosotros: habría → habríais  (yo_form + "is")
-    _cond_std["vosotros"] = _cond_src.get("yo", "") + "is"
-
-    if _verb not in ALL_CONJUGATION_VERBS:
-        ALL_CONJUGATION_VERBS[_verb] = {
-            "english":     _info["english"],
-            "sentence":    _info["sentence"],
-            "conditional": _cond_std,
-        }
-    else:
-        ALL_CONJUGATION_VERBS[_verb]["conditional"] = _cond_std
-        ALL_CONJUGATION_VERBS[_verb].setdefault("english", _info["english"])
-        ALL_CONJUGATION_VERBS[_verb].setdefault("sentence", _info["sentence"])
-
-# ── Lessons ───────────────────────────────────────────────────────────────────
+# ── Lessons registry ──────────────────────────────────────────────────────────
 
 LESSONS = {
     "vocabulary": {
         "1": {
-            "title": "Vocabulario: Lección 5",
+            "title":    "Vocabulario: Lección 5",
             "subtitle": "Un Festival de Arte",
-            "words": VOCABULARY,
+            "words":    VOCABULARY,
         },
         "2": {
-            "title": "Vocabulario: Lección 4",
+            "title":    "Vocabulario: Lección 4",
             "subtitle": "El Mundo del Trabajo",
-            "words": VOCABULARY_L4,
+            "words":    VOCABULARY_L4,
         },
         "3": {
-            "title": "Vocabulario: Lección 6",
+            "title":    "Vocabulario: Lección 6",
             "subtitle": "La Actualidad",
-            "words": VOCABULARY_L6,
+            "words":    VOCABULARY_L6,
         },
         "4": {
-            "title": "Vocabulario: Números",
+            "title":    "Vocabulario: Números",
             "subtitle": "Un Sinnúmero de Números",
-            "words": VOCABULARY_NUMBERS,
+            "words":    VOCABULARY_NUMBERS,
+        },
+        "5": {
+            "title":    "Expresiones Impersonales",
+            "subtitle": "El Subjuntivo con Expresiones Impersonales",
+            "words":    VOCABULARY_SUBJ_IMPERSONAL,
+        },
+        "6": {
+            "title":    "Duda e Incertidumbre",
+            "subtitle": "El Subjuntivo con Expresiones de Duda",
+            "words":    VOCABULARY_SUBJ_DOUBT,
+        },
+        "7": {
+            "title":    "Voluntad y Deseo",
+            "subtitle": "Expresiones de Voluntad y Deseo con el Subjuntivo",
+            "words":    VOCABULARY_SUBJ_WILL,
         },
     },
-    "conjugation": {
-        "1": {
-            "title": "Lección 5",
-            "subtitle": "Verbos",
-            "verbs": VERBS,
-            "pronouns": PRONOUNS,
-            "tense_names": TENSE_NAMES,
-        },
-        "2": {
-            "title": "El Condicional",
-            "subtitle": "Práctica de conjugación",
-            "verbs": CONDITIONAL_VERBS,
-            "pronouns": CONDITIONAL_PRONOUNS,
-            "tense_names": CONDITIONAL_TENSE,
-        },
-        "3": {
-            "title": "Lección 4",
-            "subtitle": "Tiempos compuestos — El Mundo del Trabajo",
-            "verbs": L4_COMPOUND_VERBS,
-            "pronouns": PRONOUNS,
-            "tense_names": COMPOUND_TENSE_NAMES,
-        },
-        "4": {
-            "title": "Lección 6",
-            "subtitle": "Tiempos compuestos — La Actualidad",
-            "verbs": L6_COMPOUND_VERBS,
-            "pronouns": PRONOUNS,
-            "tense_names": COMPOUND_TENSE_NAMES,
-        },
-    },
+    "practica": PRACTICA_LESSONS,
 }
